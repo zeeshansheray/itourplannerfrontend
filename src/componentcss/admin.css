@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700');
+#a_Box {
+  background-color: black;
+  height: 800px;
+}
+
+#a_txt {
+  color: white;
+  margin-top: 40px;
+  margin-bottom: 60px;
+  margin-left: 10px;
+}
+#a_form {
+  background-color: #101820ff;
+  height: 400px;
+  height: 400px;
+  margin-top: 70px;
+}
+#a_img {
+  height: 70px;
+  margin-top: -2px;
+}
+#btn_query {
+  background-color: #101820ff;
+}
+#btn_feedback {
+  background-color: #101820ff;
+}
+

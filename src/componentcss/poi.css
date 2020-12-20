@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700');
+* {
+  margin: 0;
+  padding: 0;
+}
+.canvasss {
+  background-size: cover;
+  background-position: center;
+  height: 820px;
+  background-color: white;
+  overflow-y: hidden;
+}
+.containerpoi{
+    position: absolute;
+    top: 50%;   
+    left: 20%;
+}
+.columnspoi{
+    content: "";
+    clear: both;
+    display: table;
+}
+::placeholder {
+  color: gray;
+  font-size: 20px;
+}
+.canvasss h3 {
+  position: absolute;
+  top: 25%;
+  left: 55%;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #040e27;
+  height: 70px;
+  font-size: 85px;
+  font-family: 'Great Vibes', cursive;
+}
+#entry{
+    float: left;
+    width: 30%;
+    padding: 7px;
+    margin-top: 10px;
+    text-align: center;
+    margin-left: 10px;
+}
+.outlineboxpoi {
+  position: absolute;
+  top: 40%;
+  left: 55%;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+#addresss {
+  font-family: 'Lato', sans-serif;
+  width: 300px;
+  height: 60px;
+  background: none;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-top: 10px;
+  text-align: left;
+  padding: 10px;
+  color: black;
+  font-weight: bold;
+  background-color: white;
+}
+#addresss::placeholder{
+  color: black;
+}
+#addresss:focus{
+outline: none;
+}
+.input-suggestion {
+  font-family: 'Lato', sans-serif;
+  width: 300px;
+  height: 60px;
+  font-size: 14px;
+  border-bottom: 1px black dotted;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 1 5px;
+  background: none;
+  font-weight: bold;
+  background: transparent;
+  color: black;
+}
+  .searchHotel {
+  width: 150px;
+  height: 60px;
+  color: black;
+  font-family: 'Lato', sans-serif;
+  border-radius: 5px;
+  border: 1px solid white;
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: lightgray;
+  text-align: center;
+}
+.viewButton{ 
+    color: black;
+    font-size: 15px;   
+    font-size: 18px;
+    text-align: center;
+    background-color: lightgray;
+    border: 1px solid white;
+    font-family: 'Titillium Web', sans-serif;
+    margin-top: 5px;
+}
+.searchHotel:hover{
+  background-color: #001529;
+  border-color: #40a9ff;
+  color: white;
+}
+.viewButton:hover{
+    background-color: #001529;
+    border-color: #40a9ff;
+    color: white;
+    
+}
+.viewButton:focus, .viewButton:focus:active{
+    outline: none;
+}
+#hotelname{
+    color: black;
+    text-align: center;
+    font-family: 'Great Vibes', cursive;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .canvasss h3 {
+    margin-left: 45px;
+    margin-top: auto;
+    font-weight: bold;
+   font-size: 45px; }
+  #entry{
+      float: left;
+      width: 300px;
+      margin-left: 100px;
+      margin-top: 20px;
+  }
+  .columnspoi{ 
+      width: 350px;
+  }
+
+  .outlineboxpoi {
+    width: 100px;
+    top: 48%;
+    left: 50%;
+    font-size: 14px;
+  }
+
+  .searchHotel { 
+    margin-top: 0px;
+    margin-left: 10px;
+  } 
+  .containerpoi{
+      margin-top: 90px;
+      
+  }
+  #addresss{ 
+    width: 230px;
+  }
+  .viewButton{
+    font-size: 15px;
+}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .canvasss h3 {
+    font-size: 42px;
+    margin-top: auto;
+    font-weight: bold;
+    margin-left: 25px;
+  }
+
+  .outlineboxpoi {
+    table-layout: auto;
+    width: 500px;
+    top: 36%;
+    left: 58%;
+    font-size: 14px;
+  }
+  #entry{
+    float: left;
+    width: 280px;
+    margin-top: 20px;
+}
+.columnspoi{ 
+    width: 650px;
+    margin-left: 50px;
+    margin-top: 90px;
+}
+
+.viewButton{
+    font-size: 15px;
+}
+.containerpoi{
+  margin-top: 90px;
+  margin-left: 10px;
+}
+  .outlineboxpoi #addresss {
+    width: 270px;
+    margin-left: 30px;
+
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1500px) {
+  .canvasss h3 {
+    font-size: 57px;
+    margin-top: auto;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 20px;  
+
+  }
+
+  .outlineboxpoi {
+    display: inline-table;
+    top: 43%;
+  }
+  .outlineboxpoi  {
+    width: 700px;
+    font-size: 14px;
+    margin-left: 20px;
+  }
+  .outlineboxpoi #addresss {
+    width: 340px;
+    margin-bottom: 10px;
+  }
+  #entry{
+    float: left;
+    width: 250px;
+    margin-top: 20px;
+}
+.columnspoi{ 
+    width: 800px;
+    margin-left: 10px;
+    margin-top: 90px;
+}
+}
+
+

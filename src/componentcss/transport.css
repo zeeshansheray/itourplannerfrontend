@@ -1,0 +1,94 @@
+#transiconsedit{ 
+    color: blue;
+}
+#transiconsdelete{
+    color:red;
+}
+#transiconsedit:hover{ 
+    color: red;
+}
+#transiconsdelete:hover{ 
+    color: blue;
+}
+
+.ant-tabs-content-holder, .ant-tabs-tabpane .ant-tabs-tabpane-active{
+    height: 480px;
+}
+
+/* Transportview tables */
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color:  #001529;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+#novehiclesbox{
+    width: 50%;
+    margin-left: 5%;
+    margin-top: 10%;
+
+}
+#notfoundicon {
+    position: absolute;
+    left: -5%;
+    top: -7%;
+    height: 10%;
+}
+#novehiclesbox h4{
+    margin-top: 30%;
+}
+#transportId h3 {
+    font-size: 45px;
+    margin-top: auto;
+    font-weight: bold;
+    margin-left: 17%;
+      }
+#userdetailstable{
+    overflow-x:scroll;
+}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) { 
+    #novehiclesbox{
+        margin-left: 0%;
+        margin-top: 10%;
+    
+    }
+    #transportId h3 {
+        font-size: 60px;
+        margin-top: auto;
+        font-weight: bold;
+        margin-left: 12%;
+        position: fixed;
+      }
+
+      #userdetailstable{
+        overflow-x:scroll;
+    }
+
+}

@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700');
+.rightPane {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0% 21% 0% 4%;
+}
+.rightCol {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    background-color: whitesmoke;
+}
+.rightPane > h1 {
+    font-weight: bold;
+}
+.left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background:linear-gradient(171deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
+.left > img {
+    flex:1;
+    margin-top: 4%;
+}
+.left {
+    background: linear-gradient(270deg, #2b17ca, #15e4af);
+    background-size: 400% 400%;
+
+    -webkit-animation: loginView 30s ease infinite;
+    -moz-animation: loginView 30s ease infinite;
+    animation: loginView 30s ease infinite;
+}
+
+@-webkit-keyframes loginView {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes loginView {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes loginView {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}

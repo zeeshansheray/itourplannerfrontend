@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700');
+.userlist{ 
+    text-align: center;
+    font-family: "Great Vibes", cursive;
+    font-weight: bold;
+    font-size: 50px;
+    color: white;
+    background-color: #262626;
+    height: 100px;
+    padding-top: 15px;
+}
+#table tr th{
+    text-align: center;
+}
+#udetails tr td{
+    text-align: center; 
+}
+#capital{ 
+    text-transform: capitalize;
+}
+.ant-layout-sider-trigger{
+    position: sticky;
+    top:0;
+}
+.ant-layout-sider-children{
+    height: 800px;
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) { 
+    #table{
+        width: 200px;
+    }
+    .userlist{
+        font-size: 20px;
+        padding-top: 30px;
+    }
+    #table tr{
+        width: 50px;
+    }
+}

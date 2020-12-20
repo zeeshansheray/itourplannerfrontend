@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700');
+.pass_show{position: relative} 
+.pass_show .ptxt { 
+position: absolute; 
+top: 50%; 
+right: 10px; 
+z-index: 1; 
+color: #f36c01; 
+margin-top: -10px; 
+cursor: pointer; 
+transition: .3s ease all; 
+} 
+.pass_show .ptxt:hover{color: #333333;} 
+
+.canvaschangepass{ 
+    height: 820px;
+    background-image: url("https://www.4kwallpaperhd.com/wp-content/uploads/2018/06/Colorado-Landscape-nature-4k-wallpaper-3840x2160.jpg");
+    background-size: cover;
+    background-position: center;
+    margin-left: 0px;
+    overflow: hidden;
+    overflow-y:hidden ;
+    overflow-x: hidden;
+}
+
+.changepassrow{
+    margin-top: 100px;
+}
+
+.resetpass{ 
+  width: 80px;
+  height: 40px;
+    color: black;
+    font-family: 'Titillium Web', sans-serif;
+    border-radius: 5px;
+    border: 1px solid white;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: lightgray;
+    text-align: center;
+    padding: 5px 5px 5px 3px;
+}
+.cancelpass{
+    width: 80px;
+    height: 40px;
+    color: black;
+    font-family: 'Titillium Web', sans-serif;
+    border-radius: 5px;
+    border: 1px solid white;
+    margin-left: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: lightgray;
+    text-align: center;
+    padding: 5px 5px 5px 3px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+.cancelpass:hover, .resetpass:hover{ 
+    background-color: #001529;
+    border-color: #40a9ff;
+    color: white;
+}
+#confirmpassword, #newpassword, #oldpassword{
+  width: 310px;
+  height: 30px;
+}
+#passicon{
+height: 40px;
+font-size: 30px;
+}
+
+
+#passicon:hover{ 
+  color: #001529;
+}
+
+.changepassform {
+    width: 400px;
+    margin: 0 auto;
+    padding: 100px 0 30px;
+    margin-bottom: 160px;
+    opacity: 0.9;
+    margin-top: -60px;
+  }
+  .changepassform form {
+    color: #7a7a7a;
+    border-radius: 2px;
+    margin-bottom: 40px;
+    font-size: 10px;
+    background: #ececec;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    position: relative;
+    margin-top: 60px;
+  }
+  .changepassform .avatar {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: -50px;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    z-index: 9;
+    background: white;
+    padding: 15px;
+    box-shadow: 0px 2px 2px rgba(1.4, 5.9, 6.2, 0.4);
+  }
+  .changepassform .avatar img {
+    margin-top: 5px;
+    width: 70px;
+    height: 50px;
+  }
+  .changepassform input[type="checkbox"] {
+    position: relative;
+    top: 1px;
+  }
+  .changepassform .btn,
+  .changepassform .btn:active {
+    font-size: 16px;
+    font-weight: bold;
+    background: #70c5c0 !important;
+    border: none;
+    margin-bottom: 20px;
+  }
+
+  
+.changepassform .btn:hover,
+.changepassform .btn:focus {
+  background: white !important;
+}
+.changepassform a {
+  color: #fff;
+  text-decoration: underline;
+}
+.changepassform a:hover {
+  text-decoration: none;
+}
+.changepassform form a {
+  color: #7a7a7a;
+  text-decoration: none;
+}
+.changepassform form a:hover {
+  text-decoration: underline;
+}
+.changepassform .bottom-action {
+  font-size: 12px;
+}

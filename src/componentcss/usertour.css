@@ -1,0 +1,14 @@
+.MuiPaper-rounded{
+    margin-left: 3.5%;
+    width: 95%;
+}
+#delIcon:hover{
+    color: red
+}
+#viewIcon:hover{
+    color: blue
+}
+
+#printIcon:hover{
+    color: #001529
+}

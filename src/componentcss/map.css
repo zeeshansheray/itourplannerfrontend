@@ -1,0 +1,414 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700');
+h1, p {
+    font-family: Lato;
+  }
+ 
+#ori{
+  font-family: 'Titillium Web', sans-serif;
+  width: 230px;
+  height: 55px;
+  background: none;
+  border-radius: 5px;
+  font-size: 20px;
+  text-align: left;
+  padding: 10px;
+  color: black;
+  border: 2px solid black;
+  font-weight: bold;
+  background-color: white;
+  margin-left: 20px;
+}  
+#ori::placeholder{
+  color: black;
+  font-size: 20px;
+}
+#ori:focus{
+  outline: none;
+}
+#des{
+  font-family: 'Titillium Web', sans-serif;
+  width: 230px;
+  height: 55px;
+  background: none;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 20px;
+  text-align: left;
+  padding: 10px;
+  color: black;
+  font-weight: bold;
+  background-color: white;
+  margin-left: 10px;
+
+}
+#des:focus{ 
+  outline: none;
+}
+#des::placeholder{
+  color: black;
+  font-size: 20px;
+}
+#routeType:focus{ 
+  outline: none;
+}
+#routeType{ 
+  width: 150px;
+  height: 55px;
+  color: black;
+  padding: 10px;
+  font-family: 'Titillium Web', sans-serif;
+  border-radius: 5px;
+  padding-left: 10px;
+  border-radius: 5px;
+  font-size: 20px;
+  margin-left: 10px;
+  font-size: 20px;
+  border: 2px solid black;
+  font-weight: bold;
+
+}
+#search{ 
+  width: 150px;
+  height: 55px;
+  color: black;
+  font-family: 'Titillium Web', sans-serif;
+  border-radius: 5px;
+  border: 2px solid lightblue;
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: bolder;
+  background-color: lightgray;
+  padding: 10px;
+  text-align: center;
+  padding: 5px 5px 5px 5px;
+  margin-top: 50px;
+  margin-right: 20px;
+}
+#search:hover{ 
+  background-color: #001529;
+  border-color: #40a9ff;
+  color: white
+}
+#mapinputbox{
+  top: 5%;
+  left: 5%;
+  position: absolute;
+  opacity: 0.9;
+}
+#mapcanvas{
+  background-size: cover;
+  background-position: center;
+  height: 820px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+#routedetails{ 
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  height: 280px;
+  padding: 10px 10px 10px 10px;
+  opacity: 0.;
+}
+#routedetails p{
+  color: black;
+  margin-left: 20px;
+  background-color: white;
+  font-size: 20px;
+  font-weight: bold;
+  height: 50px;
+  padding: 10px 10px 10px 10px;
+}
+#names{ 
+  font-size: 23px;
+  font-weight: bold;
+}
+#routeheading{
+  color: black;
+  margin-left: 20px;
+  background-color: white;
+  font-size: 30px;
+  height: 50px;
+  padding: 10px 10px 10px 10px;
+}
+#routedetails ul { 
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+  margin-left: 10px;
+}
+#routedetails ul li{
+  color: black;
+}
+#routedetails ul li h2 {
+  font-size: 25px;
+  margin-left: -5px;
+  color: black;
+  text-transform: capitalize;
+  margin-top: -10px;
+}
+
+@media only screen and (min-width: 480px) and (max-width:767px){ 
+  #ori{
+    font-family: 'Titillium Web', sans-serif;
+    width: 230px;
+    height: 40px;
+    background: none;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: left;
+    padding: 10px;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    margin-left: -10px; 
+  } 
+  #ori::placeholder{
+    font-size: 15px;
+  } 
+  #viewmap{ 
+    overflow: auto;
+  }
+  #mapitself{ 
+    overflow: auto;
+    width: 400px;
+  }
+ 
+  #des{
+    font-family: 'Titillium Web', sans-serif;
+    width: 230px;
+    height: 40px;
+    background: none;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: left;
+    padding: 10px;
+    margin-top: 10px;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    margin-left: -10px;
+  } 
+  #des::placeholder{
+    font-size: 15px;
+  } 
+  #mapinputbox{  
+    width: 190px;
+    margin-top: 45px;
+  }
+  #routeType{ 
+    font-family: 'Titillium Web', sans-serif;
+    width: 230px;
+    height: 40px;
+    background: none;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: left;
+    padding: 0px;
+    margin-left: -10px;
+    margin-top: 10px;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    margin-left: -10px;
+  }
+  #search{ 
+    margin-top: 10px;
+    margin-left: -10px;
+    height: 50px;
+    width: 120px;
+  }
+  #routedetails{ 
+    position: absolute;
+    top: 35%;
+    width: 300px;
+    left: -10px;
+    height: 200px;
+    padding: 10px 10px 10px 10px;
+  }
+  #routedetails p{
+    color: black;
+    margin-left: 20px;
+    background-color: white;
+    font-size: 15px;
+    height: 50px;
+    padding: 10px 10px 10px 10px;
+  }
+  #names{
+    font-size: 16px;
+  }
+
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) { 
+  #ori{
+    font-family: 'Titillium Web', sans-serif;
+    width: 230px;
+    height: 40px;
+    background: none;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: left;
+    padding: 10px;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    margin-left: -10px; 
+  } 
+  #ori::placeholder{
+    font-size: 15px;
+  } 
+
+  #des{
+    font-family: 'Titillium Web', sans-serif;
+    width: 230px;
+    height: 40px;
+    background: none;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: left;
+    padding: 10px;
+    margin-top: 10px;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    margin-left: -10px;
+  } 
+  #des::placeholder{
+    font-size: 15px;
+  } 
+  #mapinputbox{  
+    width: 190px;
+    margin-top: 45px;
+  }
+  #routeType{ 
+    font-family: 'Titillium Web', sans-serif;
+    width: 230px;
+    height: 40px;
+    background: none;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: left;
+    padding: 0px;
+    margin-left: -10px;
+    margin-top: 10px;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    margin-left: -10px;
+  }
+  #search{ 
+    margin-top: 10px;
+    margin-left: 40px;
+    height: 50px;
+    width: 120px;
+  }
+  #routedetails{ 
+    position: absolute;
+    top: 35%;
+    left: -10px;
+    height: 200px;
+    padding: 10px 10px 10px 10px;
+    
+  }
+  #names{ 
+    font-size: 18px;
+    font-weight: bold;
+  }
+  #mapitself{
+    width: 100%;
+  }
+
+}
+@media only screen and (min-width: 992px) and (max-width: 1300px) { 
+  #ori{
+    font-family: 'Titillium Web', sans-serif;
+    width: 230px;
+    height: 40px;
+    background: none;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: left;
+    padding: 10px;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    margin-left: -10px; 
+  } 
+  #ori::placeholder{
+    font-size: 15px;
+  } 
+
+  #des{
+    font-family: 'Titillium Web', sans-serif;
+    width: 230px;
+    height: 40px;
+    background: none;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: left;
+    padding: 10px;
+    margin-top: 10px;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    margin-left: -10px;
+  } 
+  #des::placeholder{
+    font-size: 15px;
+  } 
+  #mapinputbox{  
+    width: 190px;
+    margin-top: 45px;
+  }
+  #routeType{ 
+    font-family: 'Titillium Web', sans-serif;
+    width: 230px;
+    height: 40px;
+    background: none;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: left;
+    padding: 0px;
+    margin-left: -10px;
+    margin-top: 10px;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    margin-left: -10px;
+  }
+  #search{ 
+    margin-top: 10px;
+    margin-left: 60px;
+    height: 50px;
+    width: 100px;
+  }
+  #routedetails{ 
+    position: absolute;
+    top: 35%;
+    left: -10px;
+    height: 200px;
+    padding: 10px 10px 10px 10px;
+  }
+  #routedetails p{
+    color: black;
+    margin-left: 20px;
+    background-color: white;
+    font-size: 15px;
+    height: 50px;
+    padding: 10px 10px 10px 10px;
+  }
+  #names{ 
+    font-size: 15px;
+    font-weight: bold;
+  }
+  #routeheading{
+    color: black;
+    margin-left: 20px;
+    background-color: white;
+    font-size: 18px;
+    height: 50px;
+    padding: 10px 10px 10px 10px;
+  }
+
+}

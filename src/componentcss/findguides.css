@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700');
+* {
+  margin: 0;
+  padding: 0;
+}
+.canvasguide {
+  height: 820px;
+  background-image: url('https://hdwallsource.com/img/2016/7/kid-backpack-computer-wallpaper-49645-51321-hd-wallpapers.jpg');
+  background-size: cover;
+  background-position: center;
+  margin-left: 0px;
+}
+.guidelocation::placeholder {
+  color: black;
+  font-size: 18px;
+}
+
+::placeholder {
+  color: gray;
+  font-size: 20px;
+}
+.canvasguide h3 {
+  position: absolute;
+  top: 25%;
+  left: 55.5%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #001529;
+  height: 70px;
+  font-weight: bold;
+  font-size: 85px;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.guidelocation {
+  font-family: 'Titillium Web', sans-serif;
+  width: 300px;
+  height: 60px;
+  background: none;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: 1rem;
+  text-align: left;
+  padding: 10px;
+  color: black;
+  font-weight: bold;
+  background-color: white;
+  float: left;
+}
+
+.input-suggestion {
+  font-family: 'Titillium Web', sans-serif;
+  width: 300px;
+  height: 90px;
+  border-bottom: 1px black dotted;
+  align-items: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: none;
+  font-size: 14px;
+  margin-left: -150px;
+  margin-top: -35px;
+  background: transparent;
+  color: black;
+}
+
+.guidesearch {
+  width: 150px;
+  height: 60px;
+  color: black;
+  font-family: 'Titillium Web', sans-serif;
+  border-radius: 5px;
+  border: 1px solid white;
+  margin-left: -330px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: lightgray;
+  text-align: center;
+}
+.guidesearch:hover {
+  background-color: #001529;
+  border-color: #40a9ff;
+  color: white;
+}
+
+.guidelocation:focus {
+  outline: 0px;
+}
+
+.outlineboxguide {
+  position: absolute;
+  top: 40%;
+  left: 66.5%;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 800px;
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .canvasguide h3 {
+    font-size: 45px;
+    margin-top: auto;
+    font-weight: bold;
+    margin-left: 45px;
+  }
+
+  .outlineboxguide .input-suggestion {
+    width: 220px;
+    margin-left: -110px;
+  }
+  .outlineboxguide {
+    width: 100px;
+    top: 48%;
+    left: 50%;
+    font-size: 14px;
+  }
+  .outlineboxguide .guidelocation {
+    width: 230px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .canvasguide h3 {
+    font-size: 42px;
+    margin-top: auto;
+    font-weight: bold;
+    margin-left: 25px;
+  }
+  .outlineboxguide {
+    width: 500px;
+    top: 37%;
+    left: 64%;
+    font-size: 14px;
+  }
+
+  .guidelocation {
+    width: 230px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    float: left;
+  }
+  .guidesearch {
+    margin-left: -90px;
+  }
+}
+@media (min-width: 991px) and (max-width: 1400px) {
+  .canvasguide h3 {
+    font-size: 57px;
+    margin-top: auto;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 30px;
+  }
+  .outlineboxguide {
+    width: 700px;
+    top: 40%;
+    left: 67.5%;
+    font-size: 14px;
+    height: 80px;
+  }
+
+  .guidelocation {
+    width: 300px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    float: left;
+  }
+  .guidesearch {
+    margin-left: -220px;
+  }
+}

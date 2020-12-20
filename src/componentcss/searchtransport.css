@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Titillium&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700");
+* {
+  margin: 0;
+  padding: 0;
+}
+.outlineboxTransport {
+  position: absolute;
+  top: 40%;
+  left: 55%;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+#vehicletype {
+  font-family: "Titillium Web", sans-serif;
+  width: 100px;
+  height: 60px;
+  background: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 18px;
+  text-align: left;
+  padding: 10px;
+  color: black;
+  font-weight: bold;
+  background-color: white;
+  margin-left: 10px;
+}
+#vehicletype::placeholder {
+  font-size: 18px;
+}
+
+#address:focus,
+#vehicletype:focus {
+  outline: none;
+}
+
+.TabHeading {
+  position: absolute;
+  top: 30%;
+  left: 20%;
+}
+.ant-tabs-tab-btn {
+  font-weight: bold;
+}
+#viewvehicle {
+  background-color: yellow;
+}
+.canvastransport {
+  background-size: cover;
+  background-position: center;
+  margin-left: 0px;
+  background-color: white;
+  height: 850px;
+}
+.canvastransport h3 {
+  position: absolute;
+  top: 25%;
+  left: 55.5%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #001529;
+  height: 70px;
+  font-weight: bold;
+  font-size: 85px;
+  font-family: "Titillium Web", sans-serif;
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .canvastransport h3 {
+    font-size: 45px;
+    margin-top: auto;
+    font-weight: bold;
+    margin-left: 45px;
+
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .canvastransport h3 {
+    font-size: 42px;
+    margin-top: auto;
+    font-weight: bold;
+    margin-left: 25px;
+   
+  }
+}
+
+@media (min-width: 991px) and (max-width: 1400px) {
+  .canvastransport h3 {
+    font-size: 55px;
+    margin-top: auto;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 30px;
+  }
+}

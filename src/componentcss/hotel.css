@@ -1,0 +1,300 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Titillium&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700");
+* {
+  margin: 0;
+  padding: 0;
+}
+.canvashotel {
+  background-size: cover;
+  background-position: center;
+  height: 820px;
+  background-color: white;
+  overflow-y: hidden;
+}
+
+.containerhotel {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  height: 500px;
+}
+#address:focus {
+  outline: none;
+}
+#address::placeholder {
+  color: black;
+  font-size: 18px;
+}
+.columnshotel {
+  content: "";
+  clear: both;
+  display: table;
+  width: 100%;
+
+}
+#hname {
+  word-wrap: break-word;
+  white-space: normal;
+}
+::placeholder {
+  color: gray;
+  font-size: 20px;
+}
+.canvashotel h3 {
+  position: absolute;
+  top: 25%;
+  left: 55%;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #001529;
+  height: 70px;
+  font-size: 85px;
+  font-family: "Great Vibes", cursive;
+}
+#entry {
+  float: left;
+  width: 30%;
+  padding: 7px;
+  margin-top: 10px;
+  margin-left: 10px;
+  text-align: center;
+}
+.outlineboxhotel {
+  position: absolute;
+  top: 40%;
+  left: 55%;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+#address {
+  font-family: "Titillium Web", sans-serif;
+  width: 300px;
+  height: 60px;
+  background: none;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: 1rem;
+  text-align: left;
+  padding: 10px;
+  color: black;
+  font-weight: bold;
+  background-color: white;
+}
+
+.input-suggestion {
+  font-family: "Titillium Web", sans-serif;
+  width: 300px;
+  height: 60px;
+  font-size: 14px;
+  border-bottom: 1px black dotted;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 1 5px;
+  background: none;
+  font-weight: bold;
+  background: transparent;
+  color: black;
+}
+
+.canvashotel .searchHotel {
+  width: 150px;
+  height: 60px;
+  color: black;
+  font-family: "Titillium Web", sans-serif;
+  border-radius: 5px;
+  border: 1px solid white;
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: lightgray;
+  text-align: center;
+}
+.viewButton {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  font-family: "Titillium Web", sans-serif;
+  font-weight: bold;
+  color: black;
+  height: 40px;
+}
+.viewButton:hover {
+  color: gold;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  font-family: "Titillium Web", sans-serif;
+  font-weight: bold;
+}
+.viewButton.focus,
+.viewButton:focus {
+  outline: 0;
+  box-shadow: none !important;
+}
+.searchHotel:hover {
+  background-color: #001529;
+  border-color: #40a9ff;
+  color: white;
+}
+.view {
+  color: black;
+  font-size: 15px;
+  font-family: "Great Vibes", cursive;
+  font-size: 18px;
+  text-align: center;
+}
+#hotelname {
+  color: black;
+  text-align: center;
+  font-family: "Great Vibes", cursive;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .canvashotel h3 {
+    font-size: 45px;
+    margin-top: auto;
+    font-weight: bold;
+    margin-left: 45px;
+  }
+  #entry {
+    float: left;
+    width: 300px;
+    margin-left: 100px;
+    margin-top: 20px;
+  }
+
+  .columnshotel {
+    width: 350px;
+    margin-top: 20px;
+  }
+
+  .outlineboxhotel {
+    width: 100px;
+    top: 48%;
+    left: 50%;
+    font-size: 14px;
+  }
+  .containerhotel {
+    margin-top: 30px;
+    margin-left: -350px;
+  }
+.columnshotel{
+  margin-left: -100px;
+}
+  .outlineboxhotel #address {
+    width: 230px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+  .view {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .canvashotel h3 {
+    font-size: 42px;
+    margin-top: auto;
+    font-weight: bold;
+    margin-left: 25px;
+  }
+  #entry {
+    float: left;
+    width: 280px;
+    margin-top: 20px;
+  }
+
+  .columnshotel {
+    width: 650px;
+    margin-left: 0px;
+    margin-top: 20px;
+  }
+
+  #hname {
+    font-size: 13px;
+  }
+  .outlineboxhotel {
+    width: 500px;
+    top: 37%;
+    left: 58%;
+    font-size: 14px;
+  }
+  .containerhotel {
+    margin-top: 40px;
+    margin-left: 40px;
+  }
+
+  .outlineboxhotel #address {
+    width: 230px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+
+  .viewButton:hover {
+    font-size: 17px;
+  }
+  
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1500px) {
+  .canvashotel h3 {
+    font-size: 57px;
+    margin-top: auto;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 30px;
+  }
+
+  #entry {
+    float: left;
+    width: 300px;
+    margin-left: 100px;
+    margin-top: 20px;
+  }
+
+  .columnshotel {
+    width: 800px;
+    margin-left: 10px;
+    margin-top: 30px;
+  }
+
+  .outlineboxhotel {
+    width: 700px;
+    top: 40%;
+    left: 58%;
+    font-size: 14px;
+    height: 80px;
+  }
+  #hname {
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .containerhotel {
+    margin-top: 40px;
+  }
+
+  .outlineboxhotel #address {
+    width: 300px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+  .view {
+    font-size: 15px;
+  }
+  .viewButton {
+    height: 40px;
+    font-weight: bold;
+  }
+}

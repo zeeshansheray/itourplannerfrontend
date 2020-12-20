@@ -1,0 +1,18 @@
+#tourgeneratorBox{
+    margin: auto;
+    width: 80%;
+    max-height: 500px;
+    padding: 10px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#tourDetails{
+    margin-left: 10%;
+}
+#poiCard{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#allHotels, .selectedhotelsList, #mapcanvas, #totalHotels, #singlehotelCard, #{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700');
+body {
+  font-family: "Varela Round", sans-serif;
+}
+.canvasdelete{ 
+  height: 820px;
+  background-image: url("https://www.pixsavor.com/uploads/large/4k-mobile/4k-nature-mobile-wallpaper.jpg");
+  background-size: cover;
+  background-position: center;
+  margin-left: 0px;
+}
+.deletebox {
+  color: black;
+  width: 400px;
+  position: absolute;
+  top: 28%;
+  left: 42%;
+  opacity: 0.9;
+}
+
+.deletebox .modal-content {
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+}
+.deletebox .modal-header {
+  border-bottom: none;
+  position: relative;
+}
+.deletebox h4 {
+  text-align: center;
+  font-size: 26px;
+  margin: 30px 0 -10px;
+}
+.deletebox .close {
+  position: absolute;
+  top: -5px;
+  right: -2px;
+}
+.deletebox .modal-body {
+  color: black;
+  margin-top: -30px;
+}
+.deletebox .modal-footer {
+  border: none;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 13px;
+  padding: 10px 15px 25px;
+}
+.deletebox .modal-footer a {
+  color: black;
+}
+.deletebox .icon-box {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border-radius: 50%;
+  z-index: 9;
+  text-align: center;
+  border: 3px solid #f15e5e;
+  margin-top: 30px;
+}
+.deletebox .icon-box i {
+  color: #f15e5e;
+  font-size: 46px;
+  display: inline-block;
+  margin-top: 13px;
+}
+.deletebox .btn,
+.deletebox .btn:active {
+  color: #fff;
+  border-radius: 4px;
+  background: #60c7c1;
+  text-decoration: none;
+  transition: all 0.4s;
+  line-height: normal;
+  min-width: 120px;
+  border: none;
+  min-height: 40px;
+  border-radius: 3px;
+  margin: 0 5px;
+}
+.deletebox .btn-secondary {
+  background: lightgray;
+  color: black; 
+}
+.deletebox .btn-secondary:hover,
+.deletebox .btn-secondary:focus {
+  background: #001529;
+  color: white;
+}
+.deletebox .btn-danger {
+  background: #f15e5e;
+}
+.deletebox .btn-danger:hover,
+.deletebox .btn-danger:focus {
+  background: #ee3535;
+}
+.trigger-btn {
+  display: inline-block;
+  margin: 100px auto;
+}
+#deletetext {
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 30px;
+  font-size: 20px;
+  color: black;
+}
+#deletelist li::before {
+  content: "\2022";
+  font-weight: bold;
+  margin-left: 120px;
+  margin-top: -20px;
+}
+#deletelist {
+  margin-top: -20px;
+}
+#deletelist li {
+  font-size: 18px;
+  color: black;
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .deletebox {
+      margin-left: 0px;
+      float: left;
+      width: 370px;
+  }
+}
