@@ -1,4 +1,4 @@
-.row {
+.Chartrow {
   padding-left: 2%;
   display: flex;
   flex-direction: row;
@@ -8,7 +8,7 @@
   justify-content: space-between;
 }
 
-.column {
+.Chartcolumn {
   margin: auto;
   display: flex;
   flex-direction: column;

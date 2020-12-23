@@ -199,11 +199,11 @@ function getStepContent(step) {
             return <Manualcheckroute />;
 
         case 2:
-            //return <Manualselectpois />
-             return <h1>third Step working</h1>
+        return <Manualselectpois />
+        // return <h1>third Step working</h1>
         case 3:
-         return <h1>fourth Step working</h1>
-        // return <Manualselecthotels />;
+            //return <h1>fourth Step working</h1>
+            return <Manualselecthotels />;
         case 4:
             return <Manualselectvehicles />
         case 5:
@@ -239,7 +239,7 @@ var travelFuel = null;
 var stayCity = null;
 var Inputdetails = null;
 var transportType = null;
-var Adults = null;
+var Adults = 1;
 const setMap = () => {
     console.log('trying to refresh')
     localStorage.setItem('source', source);
@@ -277,6 +277,8 @@ class Inputtourdetails extends Component {
         this.enddateChange = this.enddateChange.bind(this);
         this.startdateChange = this.startdateChange.bind(this);
     }
+
+
     componentDidMount() {
         this.documentData = JSON.parse(localStorage.getItem('document'));
         if (localStorage.getItem('document')) {
@@ -337,14 +339,16 @@ class Inputtourdetails extends Component {
         })
         this.setbrowserHistory();
     }
-    async adultsChange(e) {
+    adultsChange = async (e) => {
         e.preventDefault();
         await this.setState({
             adults: e.target.value
         })
-        this.setbrowserHistory();
-        Adults= this.state.adults;
-        localStorage.setItem('adults',this.state.adults)
+        Adults = this.state.adults;
+        //this.setbrowserHistory();
+        console.log('adultchange' + Adults);
+        localStorage.setItem('adults', this.state.adults)
+        //localStorage.setItem('adults',this.state.adults)
     }
     async childernsChange(e) {
         e.preventDefault();
@@ -359,6 +363,7 @@ class Inputtourdetails extends Component {
             <div id="booking" className="section">
                 <div className="section-center">
                     <div className="container" >
+
                         <div className="row" >
                             <div className="col-md-4 col-md-pull-7" style={{ marginLeft: '33%', overflowY: 'hidden' }}>
                                 <div className="booking-form" style={{ height: '420px' }}>
@@ -377,21 +382,21 @@ class Inputtourdetails extends Component {
                                             <div className="col-sm-6">
                                                 <div className="form-group">
                                                     <span className="form-label">Start date</span>
-                                                    <input className="form-control" type="date" id="startdate" min="2020-12-20" max="2020-12-28" style={{ marginLeft:'-3%',  fontSize: '12px', width:'140px' }} onChange={this.startdateChange} value={this.state.startdate} required />
+                                                    <input className="form-control" type="date" id="startdate" min="2020-12-22" max="2020-12-28" style={{ marginLeft: '-3%', fontSize: '12px', width: '140px' }} onChange={this.startdateChange} value={this.state.startdate} required />
                                                 </div>
                                             </div>
                                             <div className="col-sm-6">
                                                 <div className="form-group">
                                                     <span className="form-label">End date</span>
-                                                    <input className="form-control" id="enddate" style={{ fontSize: '12px', width:'140px' }} min="2020-12-20" max="2020-12-28" onChange={this.enddateChange} type="date" value={this.state.enddate} required />
+                                                    <input className="form-control" id="enddate" style={{ fontSize: '12px', width: '140px' }} min="2020-12-22" max="2020-12-28" onChange={this.enddateChange} type="date" value={this.state.enddate} required />
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-sm-4">
+                                            <div className="col-sm-6">
                                                 <div className="form-group">
                                                     <span className="form-label">Transport</span>
-                                                    <select onChange={this.typeChange} className="form-control" style={{ fontSize: '13px' }}>
+                                                    <select onChange={this.typeChange} className="form-control" style={{ marginLeft: '-3%', fontSize: '12px', width: '140px' }}>
                                                         <option value="Bus">Bus</option>
                                                         <option value="Personal">Personal</option>
                                                         <option value="Rental">Rental</option>
@@ -399,30 +404,14 @@ class Inputtourdetails extends Component {
                                                     <span className="select-arrow" />
                                                 </div>
                                             </div>
-                                            <div className="col-sm-4">
+                                            <div className="col-sm-6">
                                                 <div className="form-group">
-                                                    <span className="form-label">Adults</span>
-                                                    <select className="form-control" onChange={this.adultsChange} value={this.state.adults}>
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                    </select>
-                                                    <span className="select-arrow" />
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-4">
-                                                <div className="form-group">
-                                                    <span className="form-label">Children</span>
-                                                    <select className="form-control" onChange={this.childernsChange} value={this.state.childerns}>
-                                                        <option>0</option>
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                    </select>
+                                                    <span className="form-label">People?</span>
+                                                    <input type='number' className="form-control" style={{ fontSize: '14px', width: '140px' }} id="manual_adults" onChange={this.adultsChange} value={this.state.adults} />
                                                     <span className="select-arrow" />
                                                 </div>
                                             </div>
                                         </div>
-
                                     </form>
                                 </div>
                             </div>
@@ -440,6 +429,7 @@ export default function Manualtrip() {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
+    const [snackbar, setSnackbar] = useState(false);
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -454,7 +444,7 @@ export default function Manualtrip() {
             startdate = document.getElementById('startdate').value;
             console.log('source is :' + source + '\ndestination is :' + destination + '\nData is :' + startdate);
             if (activeStep == 0 && ((source && destination && startdate && enddate) === '')) {
-                window.alert('Enter the details first');
+                setSnackbar(true);
             }
             else if (activeStep == 0 && ((source && destination && startdate && enddate) !== '')) {
                 setMap();
@@ -474,8 +464,11 @@ export default function Manualtrip() {
         else if (activeStep == 2 && localStorage.getItem('selectedpoi') === null) {
             window.alert('Do select some poi first');
         }
-        else if (activeStep == 3 && localStorage.getItem('selectedhotel') === null) {
-            window.alert('Please select a hotel first');
+        // else if (activeStep == 3 && localStorage.getItem('selectedhotel') === null) {
+        //     window.alert('Please select a hotel first');
+        // }
+        else if (activeStep == 3 && localStorage.getItem('transportType'=='Personal')){
+            setActiveStep((prevActiveStep) => prevActiveStep + 2);
         }
         else {
             handleNext();
@@ -493,10 +486,22 @@ export default function Manualtrip() {
         transportType = 'Bus';
         localStorage.setItem('transportType', transportType);
     }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackbar(false);
+    }
     Inputdetails = { source: source, destination: destination, startdate: startdate, enddate: enddate, travelFuel: travelFuel, travelDistance: travelDis, travelTime: travelTime, stayCity: stayCity, transportType: transportType, Adults: Adults }
     return (
         <div className="canvastransport" id="transportId" style={{ height: '750px' }}>
             <h3>Manual Tour</h3>
+            <Snackbar open={snackbar} style={{ position: 'absolute', left: '81%', top: '20%' }} autoHideDuration={800} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error">
+                    Please enter the details.
+        </Alert>
+            </Snackbar>
             <div className={classes.root} style={{ marginTop: '10%' }}>
                 <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
                     {steps.map((label) => (
@@ -642,7 +647,7 @@ class Manualcheckroute extends Component {
                     <GoogleMapExample
                         containerElement={
                             <div
-                                id="viewmap"    
+                                id="viewmap"
                                 style={{ height: `600px`, width: '1800px', position: 'relative' }}
                             />
                         }
@@ -659,7 +664,7 @@ class Manualcheckroute extends Component {
                         Refresh
       </Button>
                 </div>
-                {this.state.transportType !== 'Bus' && travelTime >= "10:00:00" ? <><Snackbar open={this.state.snackbar} style={{ position: 'absolute', left: '30%', top: '33%', width: '450px' }} autoHideDuration={6000000} onClose={handleClose}>
+                {this.state.transportType !== 'Bus' && travelTime >= "10:00:00" ? <><Snackbar open={this.state.snackbar} style={{ position: 'absolute', left: '30%', top: '33%', width: '450px' }} autoHideDuration={800} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="info">
                         Recommendation
         </Alert>

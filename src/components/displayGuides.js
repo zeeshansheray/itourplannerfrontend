@@ -67,11 +67,11 @@ function RenderGuides({ Guides }) {
                         Available
                       </MDBIcon>
                     ) : (
-                      <MDBIcon icon="circle" style={{ color: 'red' }}>
-                        {' '}
+                        <MDBIcon icon="circle" style={{ color: 'red' }}>
+                          {' '}
                         Not avialable
-                      </MDBIcon>
-                    )}
+                        </MDBIcon>
+                      )}
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
@@ -82,15 +82,12 @@ function RenderGuides({ Guides }) {
     );
   } else {
     return (
-      <div>
+      <div >
         <Notfound
-          message={'Sorry :('}
-          sidemessage="No Guides Found!"
           detail={[
-            'Go to ',
-            <strong>Provides Services </strong>,
-            'and Add yourself as an guide for your own City.',
+            <strong>No guides found</strong>,
           ]}
+          style={{ marginTop: '15%' }}
         />
       </div>
     );

@@ -96,7 +96,7 @@ class ServiceProviderSignup extends Component {
         })
         .then((res) => {
           console.log(res);
-          if (res.data.success) {
+          if (res.data.user) {
             this.setState({ loading: false });
             toast.success('Account Created Successfully');
             window.location.href = '/spsignin';

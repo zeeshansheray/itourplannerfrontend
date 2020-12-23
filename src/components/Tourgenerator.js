@@ -74,6 +74,14 @@ export default class Tourgenerator extends Component {
             vehiclePrice: parseInt(localStorage.getItem('selectedVehicle')),
             weatherDetails: [],
             budget: null,
+            tagHotelTypeValue: null,
+            tagWeatherTypeValue: null,
+            tagTripTypeValue: null,
+            tagLocationTypeValue: null,
+            tagHotelType: null,
+            tagWeatherType: null,
+            tagTripType: null,
+            tagLocationType: null,
         }
     }
     //alert	
@@ -91,7 +99,24 @@ export default class Tourgenerator extends Component {
         })
         console.log('Trip days are ' + this.state.tripDays);
     }
+    getTags = async () => {
+        await axios.get(
+            "http://localhost:3000/users/getTags",
+        ).then((res) => {
+
+            this.setState({
+                tagLocationType: res.data.tagLocations,
+                tagHotelType: res.data.tagHotels,
+                tagTripType: res.data.tagTrips,
+                tagWeatherType: res.data.tagWeather
+            })
+            console.log(this.state.tagWeatherType);
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
     async componentDidMount() {
+        this.getTags();
         console.log('Input det' + JSON.stringify(this.state.inputDetails));
         const selectedPois = JSON.parse(localStorage.getItem('selectedpoi'));
         console.log('selected hotel ' + JSON.stringify(this.state.selectedHotel));
@@ -171,21 +196,23 @@ export default class Tourgenerator extends Component {
             })
         }
 
-
+        console.log('hotel price before ' + this.state.selectedHotel[0].price);
         let price = this.state.selectedHotel[0].price.match(/\d+(?:\.\d+)?/g);
         console.log('price length' + price.length);
         price = parseInt(price[0] + price[1]);
+        let hotelprice = price * (this.state.tripDays * (this.state.inputDetails.Adults / 2));
+        console.log('hotel price after ' + price);
         console.log('sohail ' + typeof price);
         await this.setState({
             isLoading: false,
             //totalDays: this.state.tripDays + 1,	
             currentDate: this.state.inputDetails.startdate,
-            hotelPrice: price * (this.state.tripDays * (this.state.inputDetails.Adults/2)),
-            budget: parseInt((this.state.vehiclePrice * this.state.tripDays) + (this.state.hotelPrice)),
-        }) 
+            hotelPrice: hotelprice,
+            budget: parseInt((this.state.vehiclePrice * this.state.tripDays) + (hotelprice)),
+        })
         console.log('mazhar total' + this.state.tripDays);
         console.log('mazhar price' + this.state.hotelPrice);
-
+        console.log('budget' + this.state.budget);
         //for fuel storage for specific traveltype
         //  if (this.state.inputDetails.stayCity != null) {
         //     this.setState({
@@ -332,6 +359,12 @@ export default class Tourgenerator extends Component {
             fuelCost: this.state.fuelCost,
             vehiclePrice: price,
             budget: this.state.budget,
+            tags: [
+                this.state.tagTripTypeValue,
+                this.state.tagHotelTypeValue,
+                this.state.tagTripTypeValue,
+                this.state.tagWeatherTypeValue
+            ],
         })
         console.log('Obj' + JSON.stringify(tourObject))
         axios
@@ -346,53 +379,58 @@ export default class Tourgenerator extends Component {
     saveTour = async (e) => {
         let tourDay = this.state.tourDay;
         e.preventDefault();
-        let confirm;
-        window.alert('total days ' + this.state.tripDays + 'tour days ' + this.state.tourDay)
-        if (this.state.tourDay > this.state.tripDays) {
-            confirm = window.confirm('Your trip days are exceeding. Do you want to increase tour days to ' + this.state.tourDay + '?');
-            await this.setState({
-                totalDays: tourDay,
-                allTourDates: [],
-            })
-            for (var i = 0; i < this.state.tripDays; i++) {
-                var new_date = moment(this.state.currentDate, "YYYY:MM:DD").add(1, 'days');
-                let dateString = new Date(new_date).toUTCString();
-                dateString = dateString.split(' ').slice(0, 4).join(' ');
-                await this.setState({
-                    currentDate: new_date,
-                    allTourDates: [...this.state.allTourDates, dateString],
-                })
-            }
-            console.log('new dates are ' + this.state.allTourDates);
-            console.log('new total days ' + this.state.tripDays);
-            this.tourObjectCreate(tourDay);
-        }
-        else if (this.state.tourDay < this.state.tripDays) {
-            let tourDay = this.state.tourDay;
-            confirm = window.confirm('Your trip is scheduled but you have free days. Do you want to shorten your trip for ' + this.state.tourDay + ' Days?');
-            await this.setState({
-                totalDays: tourDay,
-                allTourDates: [],
-            })
-            for (var i = 0; i < this.state.tripDays; i++) {
-                var new_date = moment(this.state.currentDate, "YYYY:MM:DD").add(1, 'days');
-                let dateString = new Date(new_date).toUTCString();
-                dateString = dateString.split(' ').slice(0, 4).join(' ');
-                await this.setState({
-                    currentDate: new_date,
-                    allTourDates: [...this.state.allTourDates, dateString],
-                })
-            }
-            console.log('new dates are ' + this.state.allTourDates);
-            console.log('new total days ' + this.state.tripDays);
-            this.tourObjectCreate(tourDay);
+        if ((this.state.tagHotelTypeValue && this.state.tagWeatherTypeValue && this.state.tagLocationTypeValue && this.state.tagTripTypeValue) == null) {
+            toast.warning('Select tour categories');
         }
         else {
-            this.tourObjectCreate(tourDay);
+            let confirm;
+            window.alert('total days ' + this.state.tripDays + 'tour days ' + this.state.tourDay)
+            if (this.state.tourDay > this.state.tripDays) {
+                confirm = window.confirm('Your trip days are exceeding. Do you want to increase tour days to ' + this.state.tourDay + '?');
+                await this.setState({
+                    totalDays: tourDay,
+                    allTourDates: [],
+                })
+                for (var i = 0; i < this.state.tripDays; i++) {
+                    var new_date = moment(this.state.currentDate, "YYYY:MM:DD").add(1, 'days');
+                    let dateString = new Date(new_date).toUTCString();
+                    dateString = dateString.split(' ').slice(0, 4).join(' ');
+                    await this.setState({
+                        currentDate: new_date,
+                        allTourDates: [...this.state.allTourDates, dateString],
+                    })
+                }
+                console.log('new dates are ' + this.state.allTourDates);
+                console.log('new total days ' + this.state.tripDays);
+                this.tourObjectCreate(tourDay);
+            }
+            else if (this.state.tourDay < this.state.tripDays) {
+                let tourDay = this.state.tourDay;
+                confirm = window.confirm('Your trip is scheduled but you have free days. Do you want to shorten your trip for ' + this.state.tourDay + ' Days?');
+                await this.setState({
+                    totalDays: tourDay,
+                    allTourDates: [],
+                })
+                for (var i = 0; i < this.state.tripDays; i++) {
+                    var new_date = moment(this.state.currentDate, "YYYY:MM:DD").add(1, 'days');
+                    let dateString = new Date(new_date).toUTCString();
+                    dateString = dateString.split(' ').slice(0, 4).join(' ');
+                    await this.setState({
+                        currentDate: new_date,
+                        allTourDates: [...this.state.allTourDates, dateString],
+                    })
+                }
+                console.log('new dates are ' + this.state.allTourDates);
+                console.log('new total days ' + this.state.tripDays);
+                this.tourObjectCreate(tourDay);
+            }
+            else {
+                this.tourObjectCreate(tourDay);
+            }
+            this.setState({
+                isDisabled: true,
+            })
         }
-        this.setState({
-            isDisabled: true,
-        })
     }
 
     checkWeather = (place) => {
@@ -666,21 +704,13 @@ export default class Tourgenerator extends Component {
                             </ListItemAvatar>
                             <ListItemText primary="Extra Days" secondary={this.state.tripDays - this.state.totalDays + ' Days '} />
                         </ListItem>}
-                        <ListItem>
-                        <ListItemAvatar color="secondary">
-                            <Avatar>
-                                <ScheduleIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Budget" secondary={this.state.budget.toLocaleString() + ' PKR'} />
-                    </ListItem>
                     <ListItem>
                         <ListItemAvatar color="secondary">
                             <Avatar>
                                 <MonetizationOnIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Hotel & Accomodation" secondary={this.state.hotelPrice.toLocaleString() + ` PKR (${this.state.tripDays} Days for ${localStorage.getItem('adults')} people)`} />
+                        <ListItemText primary="Hotel & Accomodation" secondary={this.state.hotelPrice.toLocaleString() + ` PKR (${this.state.tripDays} Days for ${this.state.inputDetails.Adults} people)`} />
                     </ListItem>
                     <ListItem>
                         <ListItemAvatar color="secondary">
@@ -696,7 +726,7 @@ export default class Tourgenerator extends Component {
                                 <DirectionsCarIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Vehicle cost" secondary={(this.state.vehiclePrice * this.state.totalDays).toLocaleString() + ` PKR (${this.state.tripDays} Days)`} />
+                        <ListItemText primary="Vehicle cost" secondary={(this.state.vehiclePrice * this.state.tripDays).toLocaleString() + ` PKR (${this.state.tripDays} Days)`} />
                     </ListItem> : <></>}
                     {this.state.transportType == 'Bus' ? <ListItem>
                         <ListItemAvatar color="secondary">
@@ -704,9 +734,18 @@ export default class Tourgenerator extends Component {
                                 <DirectionsCarIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Vehicle cost" secondary={(this.state.vehiclePrice * (this.state.tripDays - 2)).toLocaleString() + ` PKR (${this.state.tripDays - 2} Days)`} />
+                        <ListItemText primary="Vehicle cost" secondary={(this.state.vehiclePrice * this.state.tripDays).toLocaleString() + ` PKR (${this.state.tripDays} Days)` + '(Including Bus)'} />
                     </ListItem> : <></>}
+                    <ListItem>
+                        <ListItemAvatar color="secondary">
+                            <Avatar>
+                                <ScheduleIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary=" Total Budget" secondary={this.state.budget.toLocaleString() + ' PKR'} />
+                    </ListItem>
                 </List>
+
                 {this.state.inputDetails.stayCity == null ? <FirstDayTripCar day={this.state.tourDay - 1} /> : <FirstDayTripCar day={this.state.tourDay - 2} />}
                 {this.state.inputDetails.stayCity == null ? <></> : <SecondDayTripCar day={this.state.tourDay - 1} />}
                 <Timeline style={{ marginLeft: '-80%' }}>
@@ -758,8 +797,8 @@ export default class Tourgenerator extends Component {
                                     <div className="row no-gutters">
                                         <div className="col-md-4">
                                             <img
-                                                //src={`https://maps.googleapis.com/maps/api/place/photo?photoreference=${'ATtYBwLAPTfowIechgm55hd0NewhM21JjCRIqlRmnWPfxhwULAem_G4grkZY4nEo10jZq36-exBA4JtBt-p9EwbXsPDmQ0SRgO1TViMfEvivhJgN9exocTFpTp9wac38-ZimHwAe5RzDw55PBrsvfLSOc1nalJb2ISLIvJp4moMfEqUTuirP'}&sensor=false&maxheight=200&maxwidth=200&key=AIzaSyD0FFwKL9zAZIpjkM9zf7CKQeNoFUIE6Ss`}	
-                                                className="card-img" style={{ height: '200px' }} />
+                                                src={`https://maps.googleapis.com/maps/api/place/photo?photoreference=${poi.photo}&sensor=false&maxheight=200&maxwidth=200&key=AIzaSyD0FFwKL9zAZIpjkM9zf7CKQeNoFUIE6Ss`}
+                                                className="card-img" style={{ height: '200px', marginLeft: '-6.5%' }} />
                                         </div>
                                         <div className="col-md-8">
                                             <div className="card-body">
@@ -801,7 +840,62 @@ export default class Tourgenerator extends Component {
                                 <div>Go with this plan or select some more Point of Interest to visit.</div></> : <>{this.state.tripDays < this.state.tourDay ? <><div>You are short of trip Days.</div><div>Go back and select some less POI's or Extend the dates.</div> </> : <>Save it now. </>}</>}
                         </TextLoop>
                     }
-                />
+                />   <label id="labels" style={{ position: 'relative', marginTop: '2%', marginLeft: '10%' }}>Tour Categories:</label>
+                    <div style={{ position: 'relative', display: 'flex', marginLeft: '15%' }}>
+                        <div id="box" style={{ display: 'flex', flexDirection: 'column' }}>
+                            <label id="labels" >Weather:</label>
+                            {Array.isArray(this.state.tagWeatherType) &&
+                                <select className="form-control" style={{ fontSize: '12px', width: '90px' }}
+                                    onChange={(e) => this.setState({ tagWeatherTypeValue: e.target.value })}
+                                >
+                                    <option>--</option>
+                                    {this.state.tagWeatherType?.map(value => {
+                                        return (
+                                            <option value={value._id}>{value.name}</option>)
+                                    })}
+                                </select>}
+                        </div>
+                        <div id="box" style={{ marginLeft: '20px', display: 'flex', flexDirection: 'column' }}>
+                            <label id="labels" style={{ float: 'left' }}>Hotels:</label>
+                            {Array.isArray(this.state.tagHotelType) &&
+                                <select className="form-control" style={{ fontSize: '12px', width: '90px' }}
+                                    onChange={(e) => this.setState({ tagHotelTypeValue: e.target.value })}
+                                >
+                                    <option>--</option>
+                                    {this.state.tagHotelType?.map(value => {
+                                        return (
+                                            <option value={value._id}>{value.name}</option>)
+                                    })}
+                                </select>}
+                        </div>
+                        <br />
+                        <div id="box" style={{ marginLeft: '20px', display: 'flex', flexDirection: 'column' }}>
+                            <label id="labels">Trip days:</label>
+                            {Array.isArray(this.state.tagTripType) &&
+                                <select className="form-control" style={{ fontSize: '12px', width: '100px' }}
+                                    onChange={(e) => this.setState({ tagTripTypeValue: e.target.value })}
+                                >
+                                    <option>--</option>
+                                    {this.state.tagTripType?.map(value => {
+                                        return (
+                                            <option value={value._id}>{value.name}</option>)
+                                    })}
+                                </select>}
+                        </div>
+                        <div id="box" style={{ marginLeft: '20px', display: 'flex', flexDirection: 'column' }}>
+                            <label id="labels" >Terrains:</label>
+                            {Array.isArray(this.state.tagLocationType) &&
+                                <select className="form-control" style={{ fontSize: '12px', width: '100px' }}
+                                    onChange={(e) => this.setState({ tagLocationTypeValue: e.target.value })}
+                                >
+                                    <option>--</option>
+                                    {this.state.tagLocationType?.map(value => {
+                                        return (
+                                            <option value={value._id}>{value.name}</option>)
+                                    })}
+                                </select>}
+                        </div>
+                    </div>
                     <div style={{ marginLeft: '85%', marginTop: '2%' }}>
                         <Button
                             variant="contained"

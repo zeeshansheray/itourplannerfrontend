@@ -256,6 +256,7 @@ export default class Manualselectpois extends Component {
                     latLng: [{ lat: poi.geometry.location.lat, lng: poi.geometry.location.lng }],
                     rating: poi.rating,
                     totalRating: poi.user_ratings_total,
+                    photo: poi.photos == undefined ? " " : poi.photos[0].photo_reference,
                     type: "poi",
                 }))
             )

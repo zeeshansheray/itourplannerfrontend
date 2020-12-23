@@ -392,13 +392,13 @@ class Inputtourdetails extends Component {
                                             <div className="col-sm-6">
                                                 <div className="form-group">
                                                     <span className="form-label" >Your Budget?</span>
-                                                    <input type="number" onChange={this.budgetChange} style={{marginLeft:'-3%',fontSize:'14px', width:'140px'}} className="form-control" value={this.state.budget} id="manual_budget" placeholder="Min 5,000 PKR" />
+                                                    <input type="number" onChange={this.budgetChange} style={{ marginLeft: '-3%', fontSize: '14px', width: '140px' }} className="form-control" value={this.state.budget} id="manual_budget" placeholder="Min 5,000 PKR" />
                                                 </div>
                                             </div>
                                             <div className="col-sm-6">
                                                 <div className="form-group">
                                                     <span className="form-label" >Hotel Type?</span>
-                                                    <select onChange={this.typeChangeHotel} className="form-control" style={{fontSize:'12px', width:'140px'}}>
+                                                    <select onChange={this.typeChangeHotel} className="form-control" style={{ fontSize: '12px', width: '140px' }}>
                                                         <option value="Economy">Economy</option>
                                                         <option value="Business">Business</option>
                                                         <option value="Luxury">Luxury</option>
@@ -411,13 +411,13 @@ class Inputtourdetails extends Component {
                                             <div className="col-sm-6">
                                                 <div className="form-group">
                                                     <span className="form-label">Start date</span>
-                                                    <input className="form-control" type="date" id="startdate" min="2020-12-20" max="2020-12-27" style={{marginLeft:'-3%',fontSize:'12px', width:'140px'}} onChange={this.startdateChange} value={this.state.startdate} required />
+                                                    <input className="form-control" type="date" id="startdate" min="2020-12-22" max="2020-12-27" style={{ marginLeft: '-3%', fontSize: '12px', width: '140px' }} onChange={this.startdateChange} value={this.state.startdate} required />
                                                 </div>
                                             </div>
                                             <div className="col-sm-6">
                                                 <div className="form-group">
                                                     <span className="form-label">End date</span>
-                                                    <input className="form-control" id="enddate" style={{fontSize:'12px', width:'140px'}} min="2020-12-20" max="2020-12-27" onChange={this.enddateChange} type="date" value={this.state.enddate} required />
+                                                    <input className="form-control" id="enddate" style={{ fontSize: '12px', width: '140px' }} min="2020-12-22" max="2020-12-27" onChange={this.enddateChange} type="date" value={this.state.enddate} required />
                                                 </div>
                                             </div>
                                         </div>
@@ -425,7 +425,7 @@ class Inputtourdetails extends Component {
                                             <div className="col-sm-6">
                                                 <div className="form-group">
                                                     <span className="form-label">Transport</span>
-                                                    <select onChange={this.typeChange} className="form-control" style={{marginLeft:'-3%',fontSize:'12px', width:'140px'}}>
+                                                    <select onChange={this.typeChange} className="form-control" style={{ marginLeft: '-3%', fontSize: '12px', width: '140px' }}>
                                                         <option value="Bus">Bus</option>
                                                         <option value="Personal">Personal</option>
                                                         <option value="Rental">Rental</option>
@@ -436,7 +436,7 @@ class Inputtourdetails extends Component {
                                             <div className="col-sm-6">
                                                 <div className="form-group">
                                                     <span className="form-label">People?</span>
-                                                    <input type='number' className="form-control"  style={{fontSize:'14px', width:'140px'}} id="manual_adults" onChange={this.adultsChange} value={this.state.adults} />
+                                                    <input type='number' className="form-control" style={{ fontSize: '14px', width: '140px' }} id="manual_adults" onChange={this.adultsChange} value={this.state.adults} />
                                                     <span className="select-arrow" />
                                                 </div>
                                             </div>
@@ -459,6 +459,7 @@ export default function Manualtrip() {
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
     const [open, setOpen] = React.useState(false);
+    const [snackbar, setSnackbar] = React.useState(false);
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
@@ -474,7 +475,9 @@ export default function Manualtrip() {
         }
 
         setOpen(false);
+        setSnackbar(false);
     };
+
 
     const submitForm = () => {
         if (activeStep == 0) {
@@ -486,7 +489,7 @@ export default function Manualtrip() {
             Adults = document.getElementById('manual_adults').value;
             console.log('source is :' + source + '\ndestination is :' + destination + '\nData is :' + startdate);
             if (activeStep == 0 && ((source && destination && startdate && enddate && budget && Adults) === '')) {
-                window.alert('Enter the details first');
+                setSnackbar(true);
             }
             if (activeStep == 0 && budget < 5000 && budget != '') {
                 handleClick();
@@ -506,12 +509,6 @@ export default function Manualtrip() {
                 handleNext();
             }
         }
-        // else if (activeStep == 2 && localStorage.getItem('selectedpoi') === null) {
-        //     window.alert('Do select some poi first');
-        // }
-        // else if (activeStep == 3 && localStorage.getItem('selectedhotel') === null) {
-        //     window.alert('Please select a hotel first');
-        // }
         else {
             handleNext();
         }
@@ -532,9 +529,14 @@ export default function Manualtrip() {
     return (
         <div className="canvastransport" id="transportId" style={{ height: '750px' }}>
             <h3>Automated Tour</h3>
-            <Snackbar open={open} label="Budget error" autoHideDuration={600000} onClose={handleClose} style={{ position: 'absolute', left: '81%', top: '40%' }}>
+            <Snackbar open={open} label="Budget error" autoHideDuration={800} onClose={handleClose} style={{ position: 'absolute', left: '81%', top: '40%' }}>
                 <Alert onClose={handleClose} severity="error">
                     Minimum budget is 5,000 PKR
+        </Alert>
+            </Snackbar>
+            <Snackbar open={snackbar} style={{ position: 'absolute', left: '81%', top: '20%' }} autoHideDuration={800} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error">
+                    Please enter the details.
         </Alert>
             </Snackbar>
             <div className={classes.root} style={{ marginTop: '10%' }}>
@@ -599,6 +601,7 @@ class Manualcheckroute extends Component {
             Lat: null,
             Lng: null,
             HotelsData: [],
+            dataFetched: false,
         }
         this.stayCityName = this.stayCityName.bind(this);
 
@@ -677,6 +680,7 @@ class Manualcheckroute extends Component {
                     latLng: [{ lat: poi.geometry.location.lat, lng: poi.geometry.location.lng }],
                     rating: poi.rating,
                     totalRating: poi.user_ratings_total,
+                    photo: poi.photos == undefined ? " " : poi.photos[0].photo_reference,
                     type: "poi",
                 }))
             )
@@ -685,6 +689,7 @@ class Manualcheckroute extends Component {
                     selectedPoi: POIS,
                     isLoading: false
                 });
+
 
 
                 fetchedPOI = this.state.selectedPoi.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
@@ -696,6 +701,7 @@ class Manualcheckroute extends Component {
                 console.log('zee3' + JSON.stringify(this.state.selectedPoi));
                 localStorage.setItem('selectedpoi', JSON.stringify(selectedPoi));
             })
+
 
         //hotel data fetch
 
@@ -816,7 +822,9 @@ class Manualcheckroute extends Component {
                 this.vehicleSelection();
 
                 //selecte hotels 
-
+                this.setState({
+                    dataFetched: true,
+                })
 
             })
 
@@ -838,7 +846,7 @@ class Manualcheckroute extends Component {
         console.log('Vehicle selection portion');
         let vehicles = [{ name: 'Toyota Vitz', price: 3200 }, { name: 'Toyota GLI (Automatic)', price: 4200 }]
         let buses = [{ name: 'Toyota Hiace', price: 6500 }, { name: 'Toyota Coaster (Ceylon)', price: 11000 }]
-        let Personal = [{name: 'personal', price: 0}]
+        let Personal = [{ name: 'personal', price: 0 }]
         if (transportType == 'Rental' || this.state.transportType == 'Bus') {
             if (Adults <= 4) {
                 selectedVehicle = vehicles[0];
@@ -853,11 +861,11 @@ class Manualcheckroute extends Component {
                 vehicles[0].price = price;
                 selectedVehicle = vehicles[0];
             }
-            else if (Adults > 12 && Adults <= 14){
+            else if (Adults > 12 && Adults <= 14) {
                 selectedVehicle = buses[0];
             }
             else if (Adults > 14 && Adults <= 29) {
-                selectedVehicle = buses[1];  
+                selectedVehicle = buses[1];
             }
         }
         else {
@@ -896,7 +904,7 @@ class Manualcheckroute extends Component {
                 {this.state.travelTime != null ? <div><h4 style={{ paddingLeft: '5%', color: '#001529', fontFamily: '"Titillium Web", "sans-serif"' }}><strong>Distance is:</strong> {this.state.travelDistance} Km's</h4>{this.state.transportType === 'Bus' ? <></> : <h4 style={{ paddingLeft: '5%', color: '#001529', fontFamily: '"Titillium Web", "sans-serif"' }}><strong>Fuel:</strong> {this.state.fuelUsed}&nbsp;Ltr's approx</h4>}<h4 style={{ paddingLeft: '5%', color: '#001529', fontFamily: '"Titillium Web", "sans-serif"' }}><strong>Time required:</strong> {this.state.travelTime}&nbsp;Hr's<br /></h4> </div> :
                     <div><h4 style={{ paddingLeft: '5%', color: '#001529', fontFamily: '"Titillium Web", "sans-serif"' }}><strong>Distance</strong>: &nbsp;<Spin /></h4>{this.state.transportType === 'Bus' ? <></> : <h4 style={{ paddingLeft: '5%', color: '#001529', fontFamily: '"Titillium Web", "sans-serif"' }}><strong>Fuel:</strong>  &nbsp;<Spin /></h4>}<h4 style={{ paddingLeft: '5%', color: '#001529', fontFamily: '"Titillium Web", "sans-serif"' }}><strong>Time required:</strong>  &nbsp;<Spin /> </h4></div>}
             </div>
-                <div id="mapCanvas" style={{ position: 'relative', height: '400px' }}>
+                {this.state.dataFetched ? <div id="mapCanvas" style={{ position: 'relative', height: '400px' }}>
                     <ToastContainer
                         position="bottom-right"
                         autoClose={5000}
@@ -912,7 +920,7 @@ class Manualcheckroute extends Component {
                         containerElement={
                             <div
                                 id="viewmap"
-                                style={{ height: `800px`, width: '1800px', position: 'relative' }}
+                                style={{ height: `600px`, width: '1800px', position: 'relative' }}
                             />
                         }
                         mapElement={<div id="mapitself" style={{ height: `55%`, width: '35%', marginLeft: '8%' }} />}
@@ -927,13 +935,13 @@ class Manualcheckroute extends Component {
                     >
                         Refresh
       </Button>
-                </div>
-                {this.state.transportType !== 'Bus' && travelTime >= "10:00:00" ? <><Snackbar open={this.state.snackbar} style={{ position: 'absolute', left: '30%', top: '33%', width: '450px' }} autoHideDuration={6000000} onClose={handleClose}>
+                </div> : <Spin style={{marginLeft: '41%', marginTop: '15%'}} size="large" /> }
+                {this.state.transportType !== 'Bus' && travelTime >= "10:00:00" ? <><Snackbar open={this.state.snackbar} style={{ position: 'absolute', left: '30%', top: '33%', width: '450px' }} autoHideDuration={800} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="info">
                         Recommendation
         </Alert>
                 </Snackbar>
-                    <Snackbar open={this.state.snackbar} style={{ position: 'absolute', left: '33%', top: '50%', width: '450px' }} autoHideDuration={6200000} onClose={handleClose}>
+                    <Snackbar open={this.state.snackbar} style={{ position: 'absolute', left: '33%', top: '50%', width: '450px' }} autoHideDuration={800} onClose={handleClose}>
                         <Alert onClose={handleClose} severity="info">
                             Do select atleast a city to stay
         </Alert>

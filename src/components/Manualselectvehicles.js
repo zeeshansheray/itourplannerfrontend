@@ -14,6 +14,7 @@ import EmojiTransportationIcon from '@material-ui/icons/EmojiTransportation';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import CommuteIcon from '@material-ui/icons/Commute';
 import CheckIcon from '@material-ui/icons/Check';
+import { Spin } from 'antd';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,6 +56,7 @@ export default class Manualselectvehicles extends Component {
       selectedVehicle: null,
       vehicles: [],
       disabled:false,
+      fetchedData: false,
     };
   }
 
@@ -65,6 +67,7 @@ export default class Manualselectvehicles extends Component {
       console.log(JSON.stringify(res.data));
       this.setState({
         vehicles: res.data.results,
+        fetchedData: true,
       })
     });
   }
@@ -128,7 +131,7 @@ export default class Manualselectvehicles extends Component {
             </Tabs>
           </AppBar>
           <TabPanel value={this.state.value} index={0}>
-            <div className="overalldiv">
+          {this.state.fetchedData ? <div className="overalldiv">
               <div className="cardcontainer">
                 {this.state.vehicles.length > 0 &&
                   this.state.vehicles.map((vehicle) => {
@@ -184,16 +187,16 @@ export default class Manualselectvehicles extends Component {
                             </div>
                           </div>
                         ) : (
-                            <div></div>
+                            <></>
                           )}
                       </div>
                     );
                   })}
               </div>
-            </div>
+            </div> : <Spin style={{marginTop:'10%', marginLeft:'45%'}} size="large"/> }
           </TabPanel>
           <TabPanel value={this.state.value} index={1}>
-            <div className="overalldiv">
+            {this.state.fetchedData ? <div className="overalldiv">
               <div className="cardcontainer">
                 {this.state.vehicles.length > 0 &&
                   this.state.vehicles.map((vehicle) => {
@@ -255,10 +258,10 @@ export default class Manualselectvehicles extends Component {
                     );
                   })}
               </div>
-            </div>
+            </div> : <Spin style={{marginTop:'10%', marginLeft:'45%'}} size="large"/> }
           </TabPanel>
           <TabPanel value={this.state.value} index={2}>
-            <div className="overalldiv">
+            {this.state.fetchedData ? <div className="overalldiv">
               <div className="cardcontainer">
                 {this.state.vehicles.length > 0 &&
                   this.state.vehicles.map((vehicle) => {
@@ -320,10 +323,10 @@ export default class Manualselectvehicles extends Component {
                     );
                   })}
               </div>
-            </div>
+            </div> : <Spin style={{marginTop:'10%', marginLeft:'45%'}} size="large"/> }
           </TabPanel>
           <TabPanel value={this.state.value} index={3}>
-            <div className="overalldiv">
+            {this.state.fetchedData ? <div className="overalldiv">
               <div className="cardcontainer">
                 {this.state.vehicles.length > 0 &&
                   this.state.vehicles.map((vehicle) => {
@@ -385,7 +388,7 @@ export default class Manualselectvehicles extends Component {
                     );
                   })}
               </div>
-            </div>
+            </div> : <Spin style={{marginTop:'10%', marginLeft:'45%'}} size="large"/> }
           </TabPanel>
         </div>
       </div>

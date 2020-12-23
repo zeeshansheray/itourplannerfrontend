@@ -189,6 +189,12 @@ export default class Manualselecthotels extends Component {
                     Hotels,
                     loading: false,
                 });
+
+                let filteredHotels = this.state.Hotels.filter(hotel => hotel.price != undefined);
+                this.setState({
+                    Hotels: filteredHotels,
+                })
+
                 this.initMap(this.state.Hotels);
 
                 console.log("data: Hotels" + JSON.stringify(this.state.Hotels));
@@ -233,7 +239,7 @@ export default class Manualselecthotels extends Component {
       </Button></div>}
                     <p id="totalHotels" style={{ color: 'white', fontFamily: 'sans-serif', float: 'left', marginLeft: '3%', marginTop: '3%', padding: '8px', backgroundColor: '#001529', height: '40%', width: '13.2%', opactity: '0.9', boxShadow: '10px, 10px, 5px,#ccc' }}>We found <span style={{ color: 'red', fontWeight: 'bold', fontSize: '20px' }}>{this.state.loading == true ? <Spin style={{ marginLeft: '2%' }} /> : this.state.Hotels.length}</span><br /> hotels in <span style={{ fontWeight: 'bold' }}>{this.state.destination}</span></p>
                     <div id="allHotels" style={{ marginTop: '3%', height: '200px', width: '820px', overflowY: 'auto', overflowX: 'hidden' }}>
-                        {this.state.Hotels.map((hotel) => <div className="card mb-3" style={{ boxShadow: '10px, 10px, 5px,#ccc', height: '201px', width: '810px', display: 'inline-block' }}>
+                        {this.state.Hotels.map((hotel) => <div className="card mb-3" style={{ marginLeft: '-3%', boxShadow: '10px, 10px, 5px,#ccc', height: '201px', width: '830px', display: 'inline-block' }}>
                             <div className="row no-gutters" id="singlehotelCard">
                                 <div className="col-md-4">
                                     <img

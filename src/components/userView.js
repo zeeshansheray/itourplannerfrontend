@@ -15,6 +15,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import BecomeGuide from '../components/becomeGuide';
 import Plantrip from './Plantrip';
 import MyTours from './UserTours';
+import RecommendedTours from './RecommendedTours';
 
 import {
   SearchOutlined,
@@ -63,6 +64,9 @@ function viewVehicles() {
 }
 function myTours() {
   ReactDOM.render(<MyTours />, document.getElementById('content'));
+}
+function recommendedTours() {
+  ReactDOM.render(<RecommendedTours />, document.getElementById('content'));
 }
 
 class UserView extends React.Component {
@@ -226,6 +230,13 @@ class UserView extends React.Component {
                 icon={<CalendarOutlined style={{ verticalAlign: '-2%' }} />}
               >
                 My Tours
+              </Menu.Item>
+              <Menu.Item
+                key="29"
+                onClick={recommendedTours}
+                icon={<CalendarOutlined style={{ verticalAlign: '-2%' }} />}
+              >
+                Recommended Tours
               </Menu.Item>
               {/* <Menu.Item
                 key="21"

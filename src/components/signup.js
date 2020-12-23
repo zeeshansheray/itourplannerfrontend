@@ -19,7 +19,15 @@ class signup extends Component {
       cpassword: 'null',
       password: 'empty',
       verificationCode: null,
+      tagHotelType: null,
+      tagWeatherType: null,
+      tagTripType: null,
+      tagLocationType: null,
       originalcode: '',
+      tagHotelTypeValue: null,
+      tagWeatherTypeValue: null,
+      tagTripTypeValue: null,
+      tagLocationTypeValue: null,
       setModal: null,
       errEmail: false,
       errPass: false,
@@ -39,50 +47,73 @@ class signup extends Component {
   };
   submit = (e) => {
     e.preventDefault();
-    if (this.state.cpassword !== this.state.password) {
-      toast.error('Password Donot match');
-      this.setState({ loading: false });
-    } else {
-      axios
-        .post('http://localhost:3000/users/sendOTP', {
-          firstname: this.state.firstname,
-          lastname: this.state.lastname,
-          username: this.state.username,
-          email: this.state.email,
-          phone: this.state.phone,
-          password: this.state.password,
-        })
-        .then((res) => {
-          if (res.status) {
-            console.log(res.data);
-            this.activeModal(res.data.success);
-            this.setState({
-              originalcode: res.data.code,
-              loading: false,
-            });
-            toast.success('Activation Code Has Been Sent To Your Account');
-          } else {
-            toast.error('Problem While Creating Account,Try Again');
+    if ((this.state.tagHotelTypeValue && this.state.tagWeatherTypeValue && this.state.tagLocationTypeValue && this.state.tagTripTypeValue) == null) {
+      toast.warning('Fill all the fields');
+    }
+    else {
+      if (this.state.cpassword !== this.state.password) {
+        toast.error('Password Donot match');
+        this.setState({ loading: false });
+      } else {
+        axios
+          .post('http://localhost:3000/users/sendOTP', {
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            username: this.state.username,
+            email: this.state.email,
+            phone: this.state.phone,
+            password: this.state.password,
+          })
+          .then((res) => {
+            if (res.status) {
+              console.log(res.data);
+              this.activeModal(res.data.success);
+              this.setState({
+                originalcode: res.data.code,
+                loading: false,
+              });
+              toast.success('Activation Code Has Been Sent To Your Account');
+            } else {
+              toast.error('Problem While Creating Account,Try Again');
+              this.setState({ loading: false });
+            }
+          })
+          .catch((err) => {
+            var error = err.toString();
+            var n = error.search('400');
+            var m = error.search('500');
+            if (n > 0) {
+              toast.error('Email already exist. ');
+            } else if (m > 0) {
+              toast.error('Username already exist. ');
+            } else {
+              toast.success('You have sucessfully created an account');
+            }
+            // toast.error("the error is : " + err);
             this.setState({ loading: false });
-          }
-        })
-        .catch((err) => {
-          var error = err.toString();
-          var n = error.search('400');
-          var m = error.search('500');
-          if (n > 0) {
-            toast.error('Email already exist. ');
-          } else if (m > 0) {
-            toast.error('Username already exist. ');
-          } else {
-            toast.success('You have sucessfully created an account');
-          }
-          // toast.error("the error is : " + err);
-          this.setState({ loading: false });
-        });
+          });
+      }
     }
   };
+  getTags = async () => {
+    await axios.get(
+      "http://localhost:3000/users/getTags",
+    ).then((res) => {
 
+      this.setState({
+        tagLocationType: res.data.tagLocations,
+        tagHotelType: res.data.tagHotels,
+        tagTripType: res.data.tagTrips,
+        tagWeatherType: res.data.tagWeather
+      })
+      console.log(this.state.tagWeatherType);
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
+  async componentDidMount() {
+    await this.getTags();
+  }
   OnSave = () => {
     if (this.state.verificationCode == this.state.originalcode) {
       console.log('Code match');
@@ -91,6 +122,12 @@ class signup extends Component {
           firstname: this.state.firstname,
           lastname: this.state.lastname,
           username: this.state.username,
+          tags: [
+            this.state.tagTripTypeValue,
+            this.state.tagHotelTypeValue,
+            this.state.tagTripTypeValue,
+            this.state.tagWeatherTypeValue
+          ],
           email: this.state.email,
           phone: this.state.phone,
           password: this.state.password,
@@ -98,7 +135,7 @@ class signup extends Component {
         })
         .then((res) => {
           console.log(res);
-          if (res.data.success) {
+          if (res.data.user) {
             this.setState({ loading: false });
             toast.success('Account Created Successfully');
             window.location.href = '/login';
@@ -119,13 +156,11 @@ class signup extends Component {
     return (
       <div className="signup">
         <div className="login-form" id="signupForm">
-          <form onSubmit={this.submit} style={{ height: '600px' }}>
+          <form onSubmit={this.submit} style={{ height: '680px' }}>
             <div className="avatar">
               <img src="/assets/img/logo.png" alt="Avatar" />
             </div>
-            <h2 className="text-center" id="signuptext">
-              {/* Registration */} {this.state.title}
-            </h2>
+            <h2 className="text-center" id="signuptext">User Registration </h2>
             <div id="box">
               <label id="labels">First Name:</label>
               <input
@@ -231,7 +266,63 @@ class signup extends Component {
                 required="required"
               />
             </div>
+            <label id="labels" style={{position:'absolute', top:'69%', left:'5.5%'}}>Select Interests:</label>
+            <div style={{position:'absolute', top:'73%', display:'flex', marginLeft:'1%'}}>
+            <div id="box" style={{ display:'flex', flexDirection:'column' }}>
+              <label id="labels" >Weather:</label>
+              {Array.isArray(this.state.tagWeatherType) &&
+                <select className="form-control" style={{ fontSize: '12px', width: '90px' }}
+                  onChange={(e) => this.setState({ tagWeatherTypeValue: e.target.value })}
+                >
+                  <option>--</option>
+                  {this.state.tagWeatherType?.map(value => {
+                    return (
+                      <option value={value._id}>{value.name}</option>)
+                  })}
+                </select>}
+            </div>
+            <div id="box" style={{ marginLeft: '20px' , display:'flex', flexDirection:'column'}}>
+              <label id="labels" style={{ float: 'left' }}>Hotels:</label>
+              {Array.isArray(this.state.tagHotelType) &&
+                <select className="form-control" style={{ fontSize: '12px', width: '90px' }}
+                  onChange={(e) => this.setState({ tagHotelTypeValue: e.target.value })}
+                >
+                  <option>--</option>
+                  {this.state.tagHotelType?.map(value => {
+                    return (
+                      <option value={value._id}>{value.name}</option>)
+                  })}
+                </select>}
+            </div>
             <br />
+            <div id="box" style={{marginLeft: '20px', display:'flex', flexDirection:'column'}}>
+              <label id="labels">Trip days:</label>
+              {Array.isArray(this.state.tagTripType) &&
+                <select className="form-control" style={{ fontSize: '12px', width: '100px' }}
+                  onChange={(e) => this.setState({ tagTripTypeValue: e.target.value })}
+                >
+                  <option>--</option>
+                  {this.state.tagTripType?.map(value => {
+                    return (
+                      <option value={value._id}>{value.name}</option>)
+                  })}
+                </select>}
+            </div>
+            <div id="box" style={{ marginLeft: '20px',display:'flex', flexDirection:'column' }}>
+              <label id="labels" >Terrains:</label>
+              {Array.isArray(this.state.tagLocationType) &&
+                <select className="form-control" style={{ fontSize: '12px', width: '100px' }}
+                  onChange={(e) => this.setState({ tagLocationTypeValue: e.target.value })}
+                >
+                  <option>--</option>
+                  {this.state.tagLocationType?.map(value => {
+                    return (
+                      <option value={value._id}>{value.name}</option>)
+                  })}
+                </select>}
+            </div>
+            </div>
+
             <div className="subcan">
               <button type="submit" id="submitbtn">
                 Submit
@@ -244,7 +335,8 @@ class signup extends Component {
               >
                 Cancel
               </button>
-            </div>
+            </div >
+            <div style={{position:'absolute', top:'86%', left:'20%'}}>
             <p className="haveAccount">
               By creating an account you agree to our&nbsp;
               <Link className="haveAccount" id="terms">
@@ -257,7 +349,7 @@ class signup extends Component {
               <Link id="loginn" to="/login">
                 Login here!
               </Link>
-            </p>
+            </p></div>
           </form>
           <Modal isOpen={this.state.setModal === true} toggle={this.hideModal}>
             <ModalHeader>

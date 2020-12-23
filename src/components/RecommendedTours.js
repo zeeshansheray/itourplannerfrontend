@@ -50,6 +50,7 @@ import ReactToPrint from 'react-to-print';
 import { Modal } from 'antd';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import LocalGasStationIcon from '@material-ui/icons/LocalGasStation';
+import { Space } from 'antd';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -76,7 +77,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default class UserTours extends Component {
+export default class recommendedTours extends Component {
     constructor() {
         super();
         this.state = {
@@ -92,13 +93,17 @@ export default class UserTours extends Component {
         this.viewTours();
     }
     viewTours = async () => {
-        console.log('working')
+        console.log(localStorage.getItem("token"));
         await axios
-            .get('http://localhost:3000/users/viewtours')
+            .get('http://localhost:3000/users/showRecommendedTrips', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
             .then((res) => {
-                if (res.data[0] != null) {
+                if (res.data.trips[0] != null) {
                     this.setState({
-                        tours: res.data,
+                        tours: res.data.trips.slice(0, res.data.trips.length > 5 ? 5 : res.data.trips.length),
                         dataFound: true,
                     })
                 }
@@ -107,30 +112,10 @@ export default class UserTours extends Component {
                         dataFound: false,
                     })
                 }
-                console.log("found is " + this.state.found);
             })
             .catch((error) => {
                 console.log(error);
             });
-    }
-    deleteTour = (tourid) => {
-        axios.delete(`http://localhost:3000/users/deletetour/` + tourid).then(response => {
-            console.log('delete req is sent');
-            var confirm = window.confirm("Are you sure, you want to remove this Tour");
-            if (confirm) {
-                if (response.data != null) {
-                    this.setState({
-                        tours: this.state.tours.filter(tour => tour._id !== tourid)
-                    });
-                    this.viewTours();
-                    toast.success('Your scheduled trip is removed sucessfully.')
-                }
-                else {
-                    toast.error('Sorry! We cannot process your request.')
-                }
-            }
-        })
-
     }
 
     showModal = (tour, index) => {
@@ -175,7 +160,7 @@ export default class UserTours extends Component {
     render() {
         return (
             <div className="canvastransport" id="transportId" style={{ marginLeft: '-20px', backgroundColor: 'white' }}>
-                <h3 style={{ fontFamily: 'Titillium Web' }}>My Tours</h3>
+                <h3 style={{ fontFamily: 'Titillium Web' }}>Recommended Tour</h3>
                 <ToastContainer
                     position="bottom-right"
                     autoClose={5000}
@@ -200,7 +185,6 @@ export default class UserTours extends Component {
                                 <StyledTableCell align="center">Total Budget</StyledTableCell>
                                 <StyledTableCell align="center">View</StyledTableCell>
                                 <StyledTableCell align="center">Print</StyledTableCell>
-                                <StyledTableCell align="center">Delete</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -220,9 +204,6 @@ export default class UserTours extends Component {
                                     </IconButton></StyledTableCell>
                                     <StyledTableCell align="center"><IconButton aria-label="view" >
                                         <PrintIcon id="printIcon" onClick={() => this.showprintModal(tour, index)} />
-                                    </IconButton></StyledTableCell>
-                                    <StyledTableCell align="center"><IconButton aria-label="delete" >
-                                        <DeleteIcon id="delIcon" fontSize="medium" onClick={this.deleteTour.bind(this, tour._id)} />
                                     </IconButton></StyledTableCell>
                                 </StyledTableRow>
                             ))}
@@ -258,8 +239,13 @@ export default class UserTours extends Component {
 
                         {/* <Printview tour={this.state.specificTour} /> */}
                     </Modal>
-                </> : <div id="notfound">
-                        <Notfound message="No trips found" style={{ position: 'absolute', top: '40%', left: '43%' }} sidemessage="Want to make exciting trips?" detail={["Go to ", <strong>Plan Trips </strong>, "and create your desired trips."]} /> </div>}</div>
+                </> : <Space size="middle" style={{ marginLeft: '50%', marginTop: '25%' }}>
+                        <Spin size="large" />
+                    </Space>
+                    //<div id="notfound">
+                    // <Notfound message="No trips found" style={{ position: 'absolute', top: '40%', left: '43%' }} sidemessage="Want to make exciting trips?" detail={["Go to ", <strong>Plan Trips </strong>, "and create your desired trips."]} /> </div>
+                }
+            </div>
         );
     }
 }
@@ -555,6 +541,14 @@ class Singletour extends Component {
                         </ListItemAvatar>
                         <ListItemText primary="Tour Days" secondary={this.state.totalDays + ' Days'} />
                     </ListItem>
+                    <ListItem>
+                        <ListItemAvatar color="secondary">
+                            <Avatar>
+                                <ScheduleIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Budget" secondary={this.state.budget.toLocaleString() + ' PKR'} />
+                    </ListItem>
                     {this.state.totalDays >= this.state.tripDays ? <></> :
                         <ListItem>
                             <ListItemAvatar color="secondary">
@@ -596,14 +590,6 @@ class Singletour extends Component {
                         </ListItemAvatar>
                         <ListItemText primary="Vehicle cost" secondary={(this.state.vehiclePrice).toLocaleString() + ` PKR (${this.state.totalDays - 1} Days)`} />
                     </ListItem> : <></>}
-                    <ListItem>
-                        <ListItemAvatar color="secondary">
-                            <Avatar>
-                                <ScheduleIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Total Budget" secondary={this.state.budget.toLocaleString() + ' PKR'} />
-                    </ListItem>
                 </List>
 
                 {this.state.inputDetails.stayCity == null ? <FirstDayTripCar day={this.state.tourDay - 1} /> : <div > <FirstDayTripCar day={this.state.tourDay - 2} /></div>}
@@ -656,12 +642,9 @@ class Singletour extends Component {
                                 <div className="card mb-3" id="poiCard" style={{ height: '92%', width: '100%', display: 'inline-block' }}>
                                     <div className="row no-gutters">
                                         <div className="col-md-4">
-                                            {poi.photo != " " ? <img
+                                            <img
                                                 src={`https://maps.googleapis.com/maps/api/place/photo?photoreference=${poi.photo}&sensor=false&maxheight=200&maxwidth=200&key=AIzaSyD0FFwKL9zAZIpjkM9zf7CKQeNoFUIE6Ss`}
-                                                className="card-img" style={{ height: '200px', marginLeft: '-3%'}} />
-                                                : <img
-                                                src="/assets/img/noimage.png"
-                                                className="card-img" style={{ height: '200px', marginLeft: '-3%'}} /> }
+                                                className="card-img" style={{ height: '200px', marginLeft: '-7%' }} />
                                         </div>
                                         <div className="col-md-8">
                                             <div className="card-body">
@@ -865,7 +848,7 @@ class Printview extends Component {
                                     {this.state.inputDetails.destination} (Night Stay)
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    {this.state.selectedHotel[0].name} (Hotel)
+                                    {this.state.selectedHotel.name} (Hotel)
                                 </Typography>
                                 <Typography></Typography>
                             </TimelineContent>
@@ -975,6 +958,14 @@ class Printview extends Component {
                         </ListItemAvatar>
                         <ListItemText primary="Tour Days" secondary={this.state.totalDays + ' Days'} />
                     </ListItem>
+                    <ListItem>
+                        <ListItemAvatar color="secondary">
+                            <Avatar>
+                                <ScheduleIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Budget" secondary={(this.state.budget).toLocaleString() + ' PKR'} />
+                    </ListItem>
                     {this.state.totalDays >= this.state.tripDays ? <></> :
                         <ListItem>
                             <ListItemAvatar color="secondary">
@@ -1016,14 +1007,6 @@ class Printview extends Component {
                         </ListItemAvatar>
                         <ListItemText primary="Vehicle cost" secondary={(this.state.vehiclePrice).toLocaleString() + ` PKR (${this.state.totalDays - 1} Days)`} />
                     </ListItem> : <></>}
-                    <ListItem>
-                        <ListItemAvatar color="secondary">
-                            <Avatar>
-                                <ScheduleIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Budget" secondary={(this.state.budget).toLocaleString() + ' PKR'} />
-                    </ListItem>
                 </List>
                 {this.state.inputDetails.stayCity == null ? <FirstDayTripCar day={this.state.tourDay - 1} /> : <FirstDayTripCar day={this.state.tourDay - 2} />}
                 {this.state.inputDetails.stayCity == null ? <></> : <SecondDayTripCar day={this.state.tourDay - 1} />}
