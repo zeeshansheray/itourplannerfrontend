@@ -12,6 +12,7 @@ import SecurityIcon from '@material-ui/icons/Security';
 import ViewGuideRequests from '../components/viewGuideRequests';
 import ViewApprovedGuides from '../components/viewApprovedGuides';
 import ViewBarChart from '../components/charts/bar';
+import Adminviewtours from '../components/adminViewTours';
 //import  AdminViewTransport from '../components/Newvehicles';
 
 import {
@@ -55,6 +56,10 @@ function removeTopdestination() {
 function viewUsers() {
   ReactDOM.render(<ViewUser />, document.getElementById('content'));
 }
+function viewTrips() {
+  ReactDOM.render(<Adminviewtours />, document.getElementById('content'));
+}
+
 function viewGuideRequests() {
   ReactDOM.render(<ViewGuideRequests />, document.getElementById('content'));
 }
@@ -157,11 +162,11 @@ class AdminProfile extends React.Component {
               </SubMenu>
             </SubMenu>
             <SubMenu key="sub2" icon={<CheckCircleOutlined />} title="View">
-              <Menu.Item key="5" icon={<BarChartOutlined />}>
+              <Menu.Item key="5" onClick={viewTrips} icon={<BarChartOutlined />}>
                 Tours
               </Menu.Item>
               <Menu.Item key="7" onClick={viewUsers} icon={<UserOutlined />}>
-                Users
+                Users 
               </Menu.Item>
               <Menu.Item
                 key="15"

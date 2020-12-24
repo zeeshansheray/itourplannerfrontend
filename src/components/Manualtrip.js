@@ -195,15 +195,15 @@ function getStepContent(step) {
             // return <h1>First Step working</h1>
             return <Inputtourdetails />;
         case 1:
-            //  return <h1>Second Step working</h1>
-            return <Manualcheckroute />;
+        //    return <h1>Second Step working</h1>
+        return <Manualcheckroute />;
 
         case 2:
-        return <Manualselectpois />
-        // return <h1>third Step working</h1>
+            return <Manualselectpois />
+            //return <h1>third Step working</h1>
         case 3:
-            //return <h1>fourth Step working</h1>
-            return <Manualselecthotels />;
+           // return <h1>fourth Step working</h1>
+         return <Manualselecthotels />;
         case 4:
             return <Manualselectvehicles />
         case 5:
@@ -467,7 +467,8 @@ export default function Manualtrip() {
         // else if (activeStep == 3 && localStorage.getItem('selectedhotel') === null) {
         //     window.alert('Please select a hotel first');
         // }
-        else if (activeStep == 3 && localStorage.getItem('transportType'=='Personal')){
+        else if (activeStep == 3 && (localStorage.getItem('transportType') == 'Personal')) {
+            localStorage.setItem('selectedVehicle', 0);
             setActiveStep((prevActiveStep) => prevActiveStep + 2);
         }
         else {
@@ -664,16 +665,11 @@ class Manualcheckroute extends Component {
                         Refresh
       </Button>
                 </div>
-                {this.state.transportType !== 'Bus' && travelTime >= "10:00:00" ? <><Snackbar open={this.state.snackbar} style={{ position: 'absolute', left: '30%', top: '33%', width: '450px' }} autoHideDuration={800} onClose={handleClose}>
+                {this.state.transportType !== 'Bus' && travelTime >= "10:00:00" ? <><Snackbar open={this.state.snackbar} style={{ position: 'absolute', left: '30%', top: '33%', width: '450px' }} autoHideDuration={1500} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="info">
-                        Recommendation
+                    Do select atleast a city to stay
         </Alert>
                 </Snackbar>
-                    <Snackbar open={this.state.snackbar} style={{ position: 'absolute', left: '33%', top: '50%', width: '450px' }} autoHideDuration={6200000} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity="info">
-                            Do select atleast a city to stay
-        </Alert>
-                    </Snackbar>
                     <div id="routeshortDetails" style={{ width: '20%', position: 'absolute', height: '120px', top: '83%', left: '73%', backgroundColor: "#E8E8E8", color: "black" }}>
                         <h4 style={{ paddingTop: '4%', backgroundColor: '#001529', height: '40px', paddingLeft: '5%', color: 'white' }}>Stay City <LocationCityIcon style={{ verticalAlign: '-5px', color: 'white' }} /></h4>
                         <TextField onChange={this.stayCityName} style={{ marginLeft: '13%' }} id="standard-secondary" label="Where would you stay?*" color="secondary" />

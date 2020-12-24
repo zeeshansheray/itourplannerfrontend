@@ -181,7 +181,7 @@ export default class recommendedTours extends Component {
                                 <StyledTableCell align="center">Destination</StyledTableCell>
                                 <StyledTableCell align="center">Start Date</StyledTableCell>
                                 <StyledTableCell align="center">End Date</StyledTableCell>
-                                <StyledTableCell align="center">Created at</StyledTableCell>
+                                <StyledTableCell align="center">Created on</StyledTableCell>
                                 <StyledTableCell align="center">Total Budget</StyledTableCell>
                                 <StyledTableCell align="center">View</StyledTableCell>
                                 <StyledTableCell align="center">Print</StyledTableCell>
@@ -197,7 +197,7 @@ export default class recommendedTours extends Component {
                                     <StyledTableCell align="center">{tour.inputDetails.destination}</StyledTableCell>
                                     <StyledTableCell align="center">{tour.inputDetails.startdate}</StyledTableCell>
                                     <StyledTableCell align="center">{tour.inputDetails.enddate}</StyledTableCell>
-                                    <StyledTableCell align="center">{tour.created_at}</StyledTableCell>
+                                    <StyledTableCell align="center">{tour.created_at.slice(0,10)}</StyledTableCell>
                                     <StyledTableCell align="center">{(tour.budget).toLocaleString()} PKR</StyledTableCell>
                                     <StyledTableCell align="center"><IconButton aria-label="view" >
                                         <PageviewIcon id="viewIcon" onClick={() => this.showModal(tour, index)} />
@@ -368,7 +368,7 @@ class Singletour extends Component {
                                     {this.state.inputDetails.stayCity == null ? this.state.inputDetails.destination : this.state.inputDetails.stayCity}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    {this.state.inputDetails.stayCity == null ? this.state.selectedHotel.name : this.state.inputDetails.stayCity} Hotel
+                                    {this.state.inputDetails.stayCity == null ? this.state.selectedHotel[0].name : this.state.inputDetails.stayCity} Hotel
                                     </Typography>
                             </TimelineContent>
                         </TimelineItem>
@@ -430,7 +430,7 @@ class Singletour extends Component {
                                     {this.state.inputDetails.destination}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    {this.state.selectedHotel.name}
+                                    {this.state.selectedHotel[0].name}
                                 </Typography>
                                 <Typography></Typography>
                             </TimelineContent>
@@ -454,7 +454,7 @@ class Singletour extends Component {
                             {this.state.inputDetails.destination}
                         </Typography>
                         <Typography variant="body2" color="textSecondary">
-                            {this.state.selectedHotel.name}
+                            {this.state.selectedHotel[0].name}
                         </Typography>
                     </TimelineContent>
                 </TimelineItem>	   </div>
@@ -479,7 +479,7 @@ class Singletour extends Component {
                                 {this.state.inputDetails.destination}
                             </Typography>
                             <Typography variant="body2" color="textSecondary">
-                                {this.state.selectedHotel.name}
+                                {this.state.selectedHotel[0].name}
                             </Typography>
                         </TimelineContent>
                     </TimelineItem>
@@ -541,14 +541,6 @@ class Singletour extends Component {
                         </ListItemAvatar>
                         <ListItemText primary="Tour Days" secondary={this.state.totalDays + ' Days'} />
                     </ListItem>
-                    <ListItem>
-                        <ListItemAvatar color="secondary">
-                            <Avatar>
-                                <ScheduleIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Budget" secondary={this.state.budget.toLocaleString() + ' PKR'} />
-                    </ListItem>
                     {this.state.totalDays >= this.state.tripDays ? <></> :
                         <ListItem>
                             <ListItemAvatar color="secondary">
@@ -561,7 +553,7 @@ class Singletour extends Component {
                     <ListItem>
                         <ListItemAvatar color="secondary">
                             <Avatar>
-                                <MonetizationOnIcon />
+                                <HotelIcon />
                             </Avatar>
                         </ListItemAvatar>
                         <ListItemText primary="Hotel & Accomodation" secondary={this.state.hotelPrice.toLocaleString() + ` PKR (${this.state.tripDays} Days for ${this.state.inputDetails.Adults} people)`} />
@@ -590,6 +582,14 @@ class Singletour extends Component {
                         </ListItemAvatar>
                         <ListItemText primary="Vehicle cost" secondary={(this.state.vehiclePrice).toLocaleString() + ` PKR (${this.state.totalDays - 1} Days)`} />
                     </ListItem> : <></>}
+                    <ListItem>
+                        <ListItemAvatar color="secondary">
+                            <Avatar>
+                                <MonetizationOnIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Total Budget" secondary={this.state.budget.toLocaleString() + ' PKR'} />
+                    </ListItem>
                 </List>
 
                 {this.state.inputDetails.stayCity == null ? <FirstDayTripCar day={this.state.tourDay - 1} /> : <div > <FirstDayTripCar day={this.state.tourDay - 2} /></div>}
@@ -606,7 +606,7 @@ class Singletour extends Component {
                         </TimelineSeparator>
                         <TimelineContent>
                             <Typography>
-                                {this.state.selectedHotel.name}
+                                {this.state.selectedHotel[0].name}
                             </Typography>
                             <Typography variant="body2" color="textSecondary">
                                 &nbsp;&nbsp;{this.state.startTime} am
@@ -641,10 +641,13 @@ class Singletour extends Component {
                             <TimelineContent>
                                 <div className="card mb-3" id="poiCard" style={{ height: '92%', width: '100%', display: 'inline-block' }}>
                                     <div className="row no-gutters">
-                                        <div className="col-md-4">
-                                            <img
+                                    <div className="col-md-4">
+                                            {poi.photo != " " ? <img
                                                 src={`https://maps.googleapis.com/maps/api/place/photo?photoreference=${poi.photo}&sensor=false&maxheight=200&maxwidth=200&key=AIzaSyD0FFwKL9zAZIpjkM9zf7CKQeNoFUIE6Ss`}
-                                                className="card-img" style={{ height: '200px', marginLeft: '-7%' }} />
+                                                className="card-img" style={{ height: '200px', marginLeft: '-3%'}} />
+                                                : <img
+                                                src="/assets/img/noimage.png"
+                                                className="card-img" style={{ height: '200px', marginLeft: '-3%'}} /> }
                                         </div>
                                         <div className="col-md-8">
                                             <div className="card-body">
@@ -787,7 +790,7 @@ class Printview extends Component {
                                     {this.state.inputDetails.stayCity == null ? this.state.inputDetails.destination : this.state.inputDetails.stayCity}  (Night Stay)
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    {this.state.inputDetails.stayCity == null ? this.state.selectedHotel.name : this.state.inputDetails.stayCity} (Hotel)
+                                    {this.state.inputDetails.stayCity == null ? this.state.selectedHotel[0].name : this.state.inputDetails.stayCity} (Hotel)
                                     </Typography>
                             </TimelineContent>
                         </TimelineItem>
@@ -848,7 +851,7 @@ class Printview extends Component {
                                     {this.state.inputDetails.destination} (Night Stay)
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    {this.state.selectedHotel.name} (Hotel)
+                                    {this.state.selectedHotel[0].name} (Hotel)
                                 </Typography>
                                 <Typography></Typography>
                             </TimelineContent>
@@ -872,7 +875,7 @@ class Printview extends Component {
                             {this.state.inputDetails.destination} (Night Stay)
                         </Typography>
                         <Typography variant="body2" color="textSecondary">
-                            {this.state.selectedHotel.name} (Hotel)
+                            {this.state.selectedHotel[0].name} (Hotel)
                         </Typography>
                     </TimelineContent>
                 </TimelineItem>
@@ -897,7 +900,7 @@ class Printview extends Component {
                                 {this.state.inputDetails.destination}
                             </Typography>
                             <Typography variant="body2" color="textSecondary">
-                                {this.state.selectedHotel.name}
+                                {this.state.selectedHotel[0].name}
                             </Typography>
                         </TimelineContent>
                     </TimelineItem>
@@ -958,14 +961,6 @@ class Printview extends Component {
                         </ListItemAvatar>
                         <ListItemText primary="Tour Days" secondary={this.state.totalDays + ' Days'} />
                     </ListItem>
-                    <ListItem>
-                        <ListItemAvatar color="secondary">
-                            <Avatar>
-                                <ScheduleIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Budget" secondary={(this.state.budget).toLocaleString() + ' PKR'} />
-                    </ListItem>
                     {this.state.totalDays >= this.state.tripDays ? <></> :
                         <ListItem>
                             <ListItemAvatar color="secondary">
@@ -978,7 +973,7 @@ class Printview extends Component {
                     <ListItem>
                         <ListItemAvatar color="secondary">
                             <Avatar>
-                                <MonetizationOnIcon />
+                                <HotelIcon />
                             </Avatar>
                         </ListItemAvatar>
                         <ListItemText primary="Hotel & Accomodation" secondary={this.state.hotelPrice.toLocaleString() + ` PKR (${this.state.inputDetails.Adults} people)`} />
@@ -1007,6 +1002,14 @@ class Printview extends Component {
                         </ListItemAvatar>
                         <ListItemText primary="Vehicle cost" secondary={(this.state.vehiclePrice).toLocaleString() + ` PKR (${this.state.totalDays - 1} Days)`} />
                     </ListItem> : <></>}
+                    <ListItem>
+                        <ListItemAvatar color="secondary">
+                            <Avatar>
+                                <MonetizationOnIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Total Budget" secondary={(this.state.budget).toLocaleString() + ' PKR'} />
+                    </ListItem>
                 </List>
                 {this.state.inputDetails.stayCity == null ? <FirstDayTripCar day={this.state.tourDay - 1} /> : <FirstDayTripCar day={this.state.tourDay - 2} />}
                 {this.state.inputDetails.stayCity == null ? <></> : <SecondDayTripCar day={this.state.tourDay - 1} />}
@@ -1021,7 +1024,7 @@ class Printview extends Component {
                         </TimelineSeparator>
                         <TimelineContent>
                             <Typography>
-                                {this.state.selectedHotel.name}
+                                {this.state.selectedHotel[0].name}
                             </Typography>
                             <Typography variant="body2" color="textSecondary">
                                 &nbsp;&nbsp;{this.state.startTime} am

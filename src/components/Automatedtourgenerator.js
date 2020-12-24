@@ -521,330 +521,378 @@ export default class Automatedtourgenerator extends Component {
 
         }
     }
-        // calculateBudget = () => {
-        //    let totalPrice = (this.state.vehiclePrice * this.state.tripDays) + (this.state.hotelPrice);
-        //     this.state.calculatedPrice= totalPrice; 
-        //     console.log('calculated price ' + this.state.calculatedPrice)
-        // }
+    // calculateBudget = () => {
+    //    let totalPrice = (this.state.vehiclePrice * this.state.tripDays) + (this.state.hotelPrice);
+    //     this.state.calculatedPrice= totalPrice; 
+    //     console.log('calculated price ' + this.state.calculatedPrice)
+    // }
 
-        render() {
-            const FirstDayTripCar = (props) => {
-                return (
-                    <div>
-                        <ToastContainer
-                            position="bottom-right"
-                            autoClose={5000}
-                            hideProgressBar={false}
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            pauseOnFocusLoss
-                            draggable
-                            pauseOnHover
-                        />
-                        <Timeline style={{ marginLeft: '-80%' }} >
-                            <h4 style={{ textAlign: 'left', marginLeft: '46%', fontSize: '22px', marginTop: '3%' }}><PlaceIcon style={{ marginTop: '-0.5%', fontSize: '19px' }} />{this.state.inputDetails.source}</h4>
-                            <h4 style={{ textAlign: 'left', marginLeft: '47%', fontSize: '20px' }}>Day {props.day} <span style={{ fontSize: '15px', color: 'white', backgroundColor: '#001529', padding: '8px', marginLeft: '0.5%', borderRadius: '20px' }}>{this.state.allTourDates[0]}</span></h4>
-                            <TimelineItem>
-                                <TimelineSeparator>
-                                    <TimelineDot>
-                                        <HomeIcon />
-                                    </TimelineDot>
-                                    <TimelineConnector />
-                                </TimelineSeparator>
-                                <TimelineContent>
-                                    <Typography>
-                                        {this.state.inputDetails.source}
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary">
-                                        {this.state.startTime} am
+    render() {
+        const FirstDayTripCar = (props) => {
+            return (
+                <div>
+                    <ToastContainer
+                        position="bottom-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                    />
+                    <Timeline style={{ marginLeft: '-80%' }} >
+                        <h4 style={{ textAlign: 'left', marginLeft: '46%', fontSize: '22px', marginTop: '3%' }}><PlaceIcon style={{ marginTop: '-0.5%', fontSize: '19px' }} />{this.state.inputDetails.source}</h4>
+                        <h4 style={{ textAlign: 'left', marginLeft: '47%', fontSize: '20px' }}>Day {props.day} <span style={{ fontSize: '15px', color: 'white', backgroundColor: '#001529', padding: '8px', marginLeft: '0.5%', borderRadius: '20px' }}>{this.state.allTourDates[0]}</span></h4>
+                        <TimelineItem>
+                            <TimelineSeparator>
+                                <TimelineDot>
+                                    <HomeIcon />
+                                </TimelineDot>
+                                <TimelineConnector />
+                            </TimelineSeparator>
+                            <TimelineContent>
+                                <Typography>
+                                    {this.state.inputDetails.source}
                                 </Typography>
-                                </TimelineContent>
-                            </TimelineItem>
-                            <TimelineItem>
-                                <TimelineSeparator>
-                                    <TimelineDot color="secondary">
-                                        <DirectionsCarIcon />
-                                    </TimelineDot>
-                                    <TimelineConnector />
-                                </TimelineSeparator>
-                                <TimelineContent>
-                                    <Typography>
-                                        Driving({this.state.transportType})
+                                <Typography variant="body2" color="textSecondary">
+                                    {this.state.startTime} am
+                                </Typography>
+                            </TimelineContent>
+                        </TimelineItem>
+                        <TimelineItem>
+                            <TimelineSeparator>
+                                <TimelineDot color="secondary">
+                                    <DirectionsCarIcon />
+                                </TimelineDot>
+                                <TimelineConnector />
+                            </TimelineSeparator>
+                            <TimelineContent>
+                                <Typography>
+                                    Driving({this.state.transportType})
                                      <Typography variant="body2" color="textSecondary">
-                                            {this.state.locationTimeInterval[0]} hours
+                                        {this.state.locationTimeInterval[0]} hours
                                     </Typography>
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary">
-                                        {/* {moment.utc(this.state.startTime,'hh:mm').add(this.state.locationTimeInterval[0],'hh:mm')} */}
-                                    </Typography>
-                                </TimelineContent>
-                            </TimelineItem>
-                            <TimelineItem>
-                                <TimelineSeparator>
-                                    <TimelineDot color="primary">
-                                        <HotelIcon />
-                                    </TimelineDot>
-                                </TimelineSeparator>
-                                <TimelineContent>
-                                    <Typography>
-                                        {this.state.inputDetails.stayCity == null ? this.state.inputDetails.destination : this.state.inputDetails.stayCity} (Night Stay)
                                 </Typography>
-                                    <Typography variant="body2" color="textSecondary">
-                                        {this.state.inputDetails.stayCity == null ? this.state.selectedHotel.name : this.state.inputDetails.stayCity} (Hotel)
+                                <Typography variant="body2" color="textSecondary">
+                                    {/* {moment.utc(this.state.startTime,'hh:mm').add(this.state.locationTimeInterval[0],'hh:mm')} */}
                                 </Typography>
-                                </TimelineContent>
-                            </TimelineItem>
-                        </Timeline>
-                    </div>
-                )
-            }
-            const SecondDayTripCar = (props) => {
-                return (
-                    <div>
-                        <Timeline style={{ marginLeft: '-80%' }} >
-                            <h4 style={{ textAlign: 'left', marginLeft: '46%', fontSize: '22px', marginTop: '3%' }}><PlaceIcon style={{ marginTop: '-0.5%', fontSize: '19px' }} />{this.state.inputDetails.stayCity}</h4>
-                            <h4 style={{ textAlign: 'left', marginLeft: '47%', fontSize: '20px' }}>Day {props.day} <span style={{ fontSize: '15px', color: 'white', backgroundColor: '#001529', padding: '8px', marginLeft: '0.5%', borderRadius: '20px' }}>{this.state.allTourDates[1]}</span></h4>
-                            <TimelineItem>
-                                <TimelineSeparator>
-                                    <TimelineDot>
-                                        <HomeIcon />
-                                    </TimelineDot>
-                                    <TimelineConnector />
-                                </TimelineSeparator>
-                                <TimelineContent>
-                                    <Typography>
-                                        {this.state.inputDetails.stayCity}
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary">
-                                        {this.state.startTime} am
-                                </Typography>
-                                </TimelineContent>
-                            </TimelineItem>
-                            <TimelineItem>
-                                <TimelineSeparator>
-                                    <TimelineDot color="secondary">
-                                        <DirectionsCarIcon />
-                                    </TimelineDot>
-                                    <TimelineConnector />
-                                </TimelineSeparator>
-                                <TimelineContent>
-                                    <Typography>
-                                        Driving &nbsp; ({this.state.transportType})
-                                    <Typography variant="body2" color="textSecondary">
-                                            {this.state.locationTimeInterval[0]} hours
-                                    </Typography>
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary">
-                                        {/* {moment.utc(this.state.startTime,'hh:mm').add(this.state.locationTimeInterval[0],'hh:mm')} */}
-                                    </Typography>
-                                </TimelineContent>
-                            </TimelineItem>
-                            <TimelineItem>
-                                <TimelineSeparator>
-                                    <TimelineDot color="primary">
-                                        <HotelIcon />
-                                    </TimelineDot>
-                                </TimelineSeparator>
-                                <TimelineContent>
-                                    <Typography>
-                                        {this.state.inputDetails.destination} (Night Stay)
-                                </Typography>
-                                    <Typography variant="body2" color="textSecondary">
-                                        {this.state.selectedHotel.name} (Hotel)
-                                </Typography>
-                                    <Typography></Typography>
-                                </TimelineContent>
-                            </TimelineItem>
-                        </Timeline>
-                    </div>
-                )
-            }
-            const EndingTowardsHotel = (props) => {
-                return (
-                    <div><TimelineItem>
-                        <TimelineSeparator>
-                            <TimelineDot color="primary">
-                                <HotelIcon />
-                            </TimelineDot>
-                        </TimelineSeparator>
-                        <TimelineContent>
-                            <Typography>
-                                {this.state.inputDetails.destination} (Night Stay)
-                        </Typography>
-                            <Typography variant="body2" color="textSecondary">
-                                {this.state.selectedHotel.name} (Hotel)
-                        </Typography>
-                        </TimelineContent>
-                    </TimelineItem>
-                    </div>
-                )
-            }
-            const StartingFromHotel = (props) => {
-                this.state.tourDay = this.state.tourDay + 1;
-                return (
-                    <div>
-                        <h4 style={{ textAlign: 'left', marginLeft: '46%', fontSize: '22px', marginTop: '3%' }}><PlaceIcon style={{ marginTop: '-0.5%', fontSize: '19px' }} />{this.state.inputDetails.destination}</h4>
-                        <h4 style={{ textAlign: 'left', marginLeft: '47%', fontSize: '20px' }}>Day {this.state.tourDay} <span style={{ fontSize: '15px', color: 'white', backgroundColor: '#001529', padding: '8px', marginLeft: '0.5%', borderRadius: '20px' }}>{this.state.tourDay > this.state.allTourDates.length ? 'Your selected Dates exceeded ' : this.state.allTourDates[this.state.tourDay - 1]}</span></h4>
+                            </TimelineContent>
+                        </TimelineItem>
                         <TimelineItem>
                             <TimelineSeparator>
                                 <TimelineDot color="primary">
                                     <HotelIcon />
                                 </TimelineDot>
-                                <TimelineConnector />
                             </TimelineSeparator>
                             <TimelineContent>
                                 <Typography>
-                                    {this.state.inputDetails.destination}
+                                    {this.state.inputDetails.stayCity == null ? this.state.inputDetails.destination : this.state.inputDetails.stayCity} (Night Stay)
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    {this.state.selectedHotel.name}
+                                    {this.state.inputDetails.stayCity == null ? this.state.selectedHotel.name : this.state.inputDetails.stayCity} (Hotel)
                                 </Typography>
                             </TimelineContent>
                         </TimelineItem>
-                        <TimelineItem>
-                            <TimelineSeparator>
-                                <TimelineDot color="secondary">
-                                    <DirectionsCarIcon />
-                                </TimelineDot>
-                                <TimelineConnector />
-                            </TimelineSeparator>
-                            <TimelineContent>
-                                <Typography>
-                                    Driving
-                    </Typography>
-                                <Typography variant="body2" color="textSecondary">
-                                    {this.state.poiToHotelTime[props.index]} hours
-                            </Typography>
-                            </TimelineContent>
-                        </TimelineItem>
-                    </div>
-                )
-            }
+                    </Timeline>
+                </div>
+            )
+        }
+        const SecondDayTripCar = (props) => {
             return (
-                <>{!this.state.isLoading ? <div id="tourgeneratorBox">
-                    <Alert
-                        message="Success"
-                        description="Your trip is scheduled."
-                        type="success"
-                        showIcon
-                        closable
-                        style={{ position: 'absolute', left: '71%', top: '70%', width: '240px' }}
-                    />
-                    <h1 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '40px', color: '#001529' }}>Scheduled Tour</h1>
-                    <Alert
-                        banner
-                        style={{ marginLeft: '36.5%', width: '27%' }}
-                        message={
-                            <TextLoop mask>
-                                <div>Your Trip has been scheduled.</div>
-                                <div>Scroll down to view your trip.</div>
-                            </TextLoop>
-                        }
-                    />
-                    <h4 style={{ textAlign: 'left', marginLeft: '3.5%', fontSize: '22px', marginTop: '3%' }}>⦿ Trip Summary</h4>
-                    <List style={{ width: '320px', marginLeft: '5.5%', marginTop: '-1%' }}>
-                        <ListItem>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <HomeIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText color="secondary" primary="Source" secondary={this.state.inputDetails.source} />
-                        </ListItem>
-                        {this.state.inputDetails.stayCity == null ? <></> : <ListItem>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <LocationCityIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary="Stay City" secondary={this.state.inputDetails.stayCity} />
-                        </ListItem>}
-                        <ListItem>
-                            <ListItemAvatar >
-                                <Avatar color="secondary">
-                                    <PlaceIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary="Destination" secondary={this.state.inputDetails.destination} />
-                        </ListItem>
-                        <ListItem>
-                            <ListItemAvatar color="secondary">
-                                <Avatar>
-                                    <DateRangeIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary="Total Days" secondary={this.state.tripDays + ' Days'} />
-                        </ListItem>
-                        {this.state.budgetExceeding ? <ListItem>
-                            <ListItemAvatar color="secondary">
-                                <Avatar>
-                                    <ScheduleIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary="Exceeded Budget" secondary={(this.state.budget - ((this.state.vehiclePrice * this.state.tripDays) + (this.state.hotelPrice))).toLocaleString() + ' PKR'} />
-                        </ListItem> : <></>}
-                        <ListItem>
-                            <ListItemAvatar color="secondary">
-                                <Avatar>
-                                    <MonetizationOnIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary="Hotel & Accomodation" secondary={this.state.hotelPrice.toLocaleString() + ` PKR (${this.state.tripDays} Days for ${this.state.inputDetails.Adults} people)`} />
-                        </ListItem>
-                        <ListItem>
-                            <ListItemAvatar color="secondary">
-                                <Avatar>
-                                    <LocalGasStationIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary="Fuel " secondary={this.state.fuelCost + ' Liters Approx'} />
-                        </ListItem>
-                        {this.state.transportType == 'Rental' ? <ListItem>
-                            <ListItemAvatar color="secondary">
-                                <Avatar>
-                                    <DirectionsCarIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary={'Vehicle Cost ' + (this.state.inputDetails.selectedVehicle.name)} secondary={(this.state.vehiclePrice * this.state.totalDays).toLocaleString() + ` PKR (${this.state.tripDays} Days)`} />
-                        </ListItem> : <></>}
-                        {this.state.transportType == 'Bus' ? <ListItem>
-                            <ListItemAvatar color="secondary">
-                                <Avatar>
-                                    <DirectionsCarIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary="Vehicle cost" secondary={(this.state.vehiclePrice * (this.state.tripDays)).toLocaleString() + ` PKR (${this.state.tripDays - 1} Days) Including Bus Fare`} />
-                        </ListItem> : <></>}
-
-                        <ListItem>
-                            <ListItemAvatar color="secondary">
-                                <Avatar>
-                                    <ScheduleIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary="Total Budget" secondary={this.state.budget.toLocaleString() + ' PKR'} />
-                        </ListItem>
-                    </List>
-                    {this.state.inputDetails.stayCity == null ? <FirstDayTripCar day={this.state.tourDay - 1} /> : <FirstDayTripCar day={this.state.tourDay - 2} />}
-                    {this.state.inputDetails.stayCity == null ? <></> : <SecondDayTripCar day={this.state.tourDay - 1} />}
-                    <Timeline style={{ marginLeft: '-80%' }}>
-                        <h4 style={{ textAlign: 'left', marginLeft: '46%', fontSize: '22px' }}><PlaceIcon style={{ marginTop: '-0.5%', fontSize: '19px' }} />{this.state.inputDetails.destination}</h4>
-                        <h4 style={{ textAlign: 'left', marginLeft: '47%', fontSize: '20px' }}>Day {this.state.tourDay} <span style={{ fontSize: '15px', color: 'white', backgroundColor: '#001529', padding: '8px', marginLeft: '0.5%', borderRadius: '20px' }}>{this.state.allTourDates[this.state.tourDay - 1]}</span> </h4>
+                <div>
+                    <Timeline style={{ marginLeft: '-80%' }} >
+                        <h4 style={{ textAlign: 'left', marginLeft: '46%', fontSize: '22px', marginTop: '3%' }}><PlaceIcon style={{ marginTop: '-0.5%', fontSize: '19px' }} />{this.state.inputDetails.stayCity}</h4>
+                        <h4 style={{ textAlign: 'left', marginLeft: '47%', fontSize: '20px' }}>Day {props.day} <span style={{ fontSize: '15px', color: 'white', backgroundColor: '#001529', padding: '8px', marginLeft: '0.5%', borderRadius: '20px' }}>{this.state.allTourDates[1]}</span></h4>
                         <TimelineItem>
                             <TimelineSeparator>
                                 <TimelineDot>
-                                    <HotelIcon />
+                                    <HomeIcon />
                                 </TimelineDot>
                                 <TimelineConnector />
                             </TimelineSeparator>
                             <TimelineContent>
                                 <Typography>
-                                    {this.state.selectedHotel.name}
+                                    {this.state.inputDetails.stayCity}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    &nbsp;&nbsp;{this.state.startTime} am
+                                    {this.state.startTime} am
+                                </Typography>
+                            </TimelineContent>
+                        </TimelineItem>
+                        <TimelineItem>
+                            <TimelineSeparator>
+                                <TimelineDot color="secondary">
+                                    <DirectionsCarIcon />
+                                </TimelineDot>
+                                <TimelineConnector />
+                            </TimelineSeparator>
+                            <TimelineContent>
+                                <Typography>
+                                    Driving &nbsp; ({this.state.transportType})
+                                    <Typography variant="body2" color="textSecondary">
+                                        {this.state.locationTimeInterval[0]} hours
+                                    </Typography>
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                    {/* {moment.utc(this.state.startTime,'hh:mm').add(this.state.locationTimeInterval[0],'hh:mm')} */}
+                                </Typography>
+                            </TimelineContent>
+                        </TimelineItem>
+                        <TimelineItem>
+                            <TimelineSeparator>
+                                <TimelineDot color="primary">
+                                    <HotelIcon />
+                                </TimelineDot>
+                            </TimelineSeparator>
+                            <TimelineContent>
+                                <Typography>
+                                    {this.state.inputDetails.destination} (Night Stay)
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                    {this.state.selectedHotel.name} (Hotel)
+                                </Typography>
+                                <Typography></Typography>
+                            </TimelineContent>
+                        </TimelineItem>
+                    </Timeline>
+                </div>
+            )
+        }
+        const EndingTowardsHotel = (props) => {
+            return (
+                <div><TimelineItem>
+                    <TimelineSeparator>
+                        <TimelineDot color="primary">
+                            <HotelIcon />
+                        </TimelineDot>
+                    </TimelineSeparator>
+                    <TimelineContent>
+                        <Typography>
+                            {this.state.inputDetails.destination} (Night Stay)
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                            {this.state.selectedHotel.name} (Hotel)
+                        </Typography>
+                    </TimelineContent>
+                </TimelineItem>
+                </div>
+            )
+        }
+        const StartingFromHotel = (props) => {
+            this.state.tourDay = this.state.tourDay + 1;
+            return (
+                <div>
+                    <h4 style={{ textAlign: 'left', marginLeft: '46%', fontSize: '22px', marginTop: '3%' }}><PlaceIcon style={{ marginTop: '-0.5%', fontSize: '19px' }} />{this.state.inputDetails.destination}</h4>
+                    <h4 style={{ textAlign: 'left', marginLeft: '47%', fontSize: '20px' }}>Day {this.state.tourDay} <span style={{ fontSize: '15px', color: 'white', backgroundColor: '#001529', padding: '8px', marginLeft: '0.5%', borderRadius: '20px' }}>{this.state.tourDay > this.state.allTourDates.length ? 'Your selected Dates exceeded ' : this.state.allTourDates[this.state.tourDay - 1]}</span></h4>
+                    <TimelineItem>
+                        <TimelineSeparator>
+                            <TimelineDot color="primary">
+                                <HotelIcon />
+                            </TimelineDot>
+                            <TimelineConnector />
+                        </TimelineSeparator>
+                        <TimelineContent>
+                            <Typography>
+                                {this.state.inputDetails.destination}
                             </Typography>
+                            <Typography variant="body2" color="textSecondary">
+                                {this.state.selectedHotel.name}
+                            </Typography>
+                        </TimelineContent>
+                    </TimelineItem>
+                    <TimelineItem>
+                        <TimelineSeparator>
+                            <TimelineDot color="secondary">
+                                <DirectionsCarIcon />
+                            </TimelineDot>
+                            <TimelineConnector />
+                        </TimelineSeparator>
+                        <TimelineContent>
+                            <Typography>
+                                Driving
+                    </Typography>
+                            <Typography variant="body2" color="textSecondary">
+                                {this.state.poiToHotelTime[props.index]} hours
+                            </Typography>
+                        </TimelineContent>
+                    </TimelineItem>
+                </div>
+            )
+        }
+        return (
+            <>{!this.state.isLoading ? <div id="tourgeneratorBox">
+                <Alert
+                    message="Success"
+                    description="Your trip is scheduled."
+                    type="success"
+                    showIcon
+                    closable
+                    style={{ position: 'absolute', left: '71%', top: '70%', width: '240px' }}
+                />
+                <h1 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '40px', color: '#001529' }}>Scheduled Tour</h1>
+                <Alert
+                    banner
+                    style={{ marginLeft: '36.5%', width: '27%' }}
+                    message={
+                        <TextLoop mask>
+                            <div>Your Trip has been scheduled.</div>
+                            <div>Scroll down to view your trip.</div>
+                        </TextLoop>
+                    }
+                />
+                <h4 style={{ textAlign: 'left', marginLeft: '3.5%', fontSize: '22px', marginTop: '3%' }}>⦿ Trip Summary</h4>
+                <List style={{ width: '320px', marginLeft: '5.5%', marginTop: '-1%' }}>
+                    <ListItem>
+                        <ListItemAvatar>
+                            <Avatar>
+                                <HomeIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText color="secondary" primary="Source" secondary={this.state.inputDetails.source} />
+                    </ListItem>
+                    {this.state.inputDetails.stayCity == null ? <></> : <ListItem>
+                        <ListItemAvatar>
+                            <Avatar>
+                                <LocationCityIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Stay City" secondary={this.state.inputDetails.stayCity} />
+                    </ListItem>}
+                    <ListItem>
+                        <ListItemAvatar >
+                            <Avatar color="secondary">
+                                <PlaceIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Destination" secondary={this.state.inputDetails.destination} />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemAvatar color="secondary">
+                            <Avatar>
+                                <DateRangeIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Total Days" secondary={this.state.tripDays + ' Days'} />
+                    </ListItem>
+                    {this.state.budgetExceeding ? <ListItem>
+                        <ListItemAvatar color="secondary">
+                            <Avatar>
+                                <MonetizationOnIcon style={{color:'red'}} />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Exceeded Budget" secondary={(this.state.budget - ((this.state.vehiclePrice * this.state.tripDays) + (this.state.hotelPrice))).toLocaleString() + ' PKR'} />
+                    </ListItem> : <></>}
+                    <ListItem>
+                        <ListItemAvatar color="secondary">
+                            <Avatar>
+                                <HotelIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Hotel & Accomodation" secondary={this.state.hotelPrice.toLocaleString() + ` PKR (${this.state.tripDays} Days for ${this.state.inputDetails.Adults} people)`} />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemAvatar color="secondary">
+                            <Avatar>
+                                <LocalGasStationIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Fuel " secondary={this.state.fuelCost + ' Liters Approx'} />
+                    </ListItem>
+                    {this.state.transportType == 'Rental' ? <ListItem>
+                        <ListItemAvatar color="secondary">
+                            <Avatar>
+                                <DirectionsCarIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary={'Vehicle Cost ' + (this.state.inputDetails.selectedVehicle.name)} secondary={(this.state.vehiclePrice * this.state.totalDays).toLocaleString() + ` PKR (${this.state.tripDays} Days)`} />
+                    </ListItem> : <></>}
+                    {this.state.transportType == 'Bus' ? <ListItem>
+                        <ListItemAvatar color="secondary">
+                            <Avatar>
+                                <DirectionsCarIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Vehicle cost" secondary={(this.state.vehiclePrice * (this.state.tripDays)).toLocaleString() + ` PKR (${this.state.tripDays - 1} Days) Including Bus Fare`} />
+                    </ListItem> : <></>}
+
+                    <ListItem>
+                        <ListItemAvatar color="secondary">
+                            <Avatar>
+                                <MonetizationOnIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Total Budget" secondary={this.state.budget.toLocaleString() + ' PKR'} />
+                    </ListItem>
+                </List>
+                {this.state.inputDetails.stayCity == null ? <FirstDayTripCar day={this.state.tourDay - 1} /> : <FirstDayTripCar day={this.state.tourDay - 2} />}
+                {this.state.inputDetails.stayCity == null ? <></> : <SecondDayTripCar day={this.state.tourDay - 1} />}
+                <Timeline style={{ marginLeft: '-80%' }}>
+                    <h4 style={{ textAlign: 'left', marginLeft: '46%', fontSize: '22px' }}><PlaceIcon style={{ marginTop: '-0.5%', fontSize: '19px' }} />{this.state.inputDetails.destination}</h4>
+                    <h4 style={{ textAlign: 'left', marginLeft: '47%', fontSize: '20px' }}>Day {this.state.tourDay} <span style={{ fontSize: '15px', color: 'white', backgroundColor: '#001529', padding: '8px', marginLeft: '0.5%', borderRadius: '20px' }}>{this.state.allTourDates[this.state.tourDay - 1]}</span> </h4>
+                    <TimelineItem>
+                        <TimelineSeparator>
+                            <TimelineDot>
+                                <HotelIcon />
+                            </TimelineDot>
+                            <TimelineConnector />
+                        </TimelineSeparator>
+                        <TimelineContent>
+                            <Typography>
+                                {this.state.selectedHotel.name}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary">
+                                &nbsp;&nbsp;{this.state.startTime} am
+                            </Typography>
+                        </TimelineContent>
+                    </TimelineItem>
+                    <TimelineItem>
+                        <TimelineSeparator>
+                            <TimelineDot color="secondary">
+                                <DirectionsCarIcon />
+                            </TimelineDot>
+                            <TimelineConnector />
+                        </TimelineSeparator>
+                        <TimelineContent>
+                            <Typography>
+                                Driving
+            </Typography>
+                            <Typography variant="body2" color="textSecondary">
+                                &nbsp;{this.state.hotelToFirstPoiTime} hours
+                            </Typography>
+                        </TimelineContent>
+                    </TimelineItem>
+                    {this.state.selectedPois.map((poi, index) => <div>
+                        {index == 0 ? <></> : index % 3 == 0 ? <StartingFromHotel index={index} /> : <></>}
+                        <TimelineItem>
+                            <TimelineSeparator>
+                                <TimelineDot color="primary" variant="outlined">
+                                    <PlaceIcon />
+                                </TimelineDot>
+                                <TimelineConnector />
+                            </TimelineSeparator>
+                            <TimelineContent>
+                                <div className="card mb-3" id="poiCard" style={{ height: '92%', width: '100%', display: 'inline-block' }}>
+                                    <div className="row no-gutters">
+                                        <div className="col-md-4">
+                                            {poi.photo != " " ? <img
+                                                src={`https://maps.googleapis.com/maps/api/place/photo?photoreference=${poi.photo}&sensor=false&maxheight=200&maxwidth=200&key=AIzaSyD0FFwKL9zAZIpjkM9zf7CKQeNoFUIE6Ss`}
+                                                className="card-img" style={{ height: '200px', marginLeft: '-3%' }} />
+                                                : <img
+                                                    src="/assets/img/noimage.png"
+                                                    className="card-img" style={{ height: '200px', marginLeft: '-3%' }} />}
+                                        </div>
+                                        <div className="col-md-8">
+                                            <div className="card-body">
+                                                <h4 className="card-title" style={{ color: '#001529', wordBreak: 'break-all' }}>{poi.name}</h4>
+                                                {poi.rating === undefined || poi.rating < 1 ? <p style={{ textAlign: 'right', marginTop: '-6%', color: '#001529' }}>Not available</p> : <p style={{ textAlign: 'right', marginTop: '-6%', color: '#001529' }}>{poi.rating > 4.5 ? 'Excellent' : poi.rating > 3.5 ? 'Good' : 'Fine'}<span style={{ backgroundColor: '#001529', borderRadius: '5px', color: 'white', padding: '5px', marginLeft: '1%' }}><strong >{poi.rating}</strong></span></p>}
+                                                <p className="card-text" style={{ color: '#001529', marginTop: '-4%', marginLeft: '0%' }}><small style={{ color: '#001529' }}><ThumbUpIcon style={{ color: 'blue', fontSize: '18px', marginTop: '-3px', marginRight: '1%' }} />{poi.totalRating == null ? 'Ratings not available' : poi.totalRating} Total Ratings</small></p>
+                                                <p className="card-text" style={{ color: 'red', marginTop: '10%', marginLeft: '0%' }}>You can stay upto {Math.floor(Math.random() * 3) + 1} Hours</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </TimelineContent>
                         </TimelineItem>
                         <TimelineItem>
@@ -859,137 +907,92 @@ export default class Automatedtourgenerator extends Component {
                                     Driving
             </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    &nbsp;{this.state.hotelToFirstPoiTime} hours
-                            </Typography>
+                                    {(index == 2 || index == this.state.selectedPois.length - 1) ? this.state.poiToHotelTime[index] + ' hours' : this.state.poiTimeIntervals[index] + ' hours'}
+                                </Typography>
                             </TimelineContent>
-                        </TimelineItem>
-                        {this.state.selectedPois.map((poi, index) => <div>
-                            {index == 0 ? <></> : index % 3 == 0 ? <StartingFromHotel index={index} /> : <></>}
-                            <TimelineItem>
-                                <TimelineSeparator>
-                                    <TimelineDot color="primary" variant="outlined">
-                                        <PlaceIcon />
-                                    </TimelineDot>
-                                    <TimelineConnector />
-                                </TimelineSeparator>
-                                <TimelineContent>
-                                    <div className="card mb-3" id="poiCard" style={{ height: '92%', width: '100%', display: 'inline-block' }}>
-                                        <div className="row no-gutters">
-                                            <div className="col-md-4">
-                                                <img
-                                                    src={`https://maps.googleapis.com/maps/api/place/photo?photoreference=${poi.photo}&sensor=false&maxheight=200&maxwidth=200&key=AIzaSyD0FFwKL9zAZIpjkM9zf7CKQeNoFUIE6Ss`}
-                                                    className="card-img" style={{ height: '200px', marginleft: '-3%' }} />
-                                            </div>
-                                            <div className="col-md-8">
-                                                <div className="card-body">
-                                                    <h4 className="card-title" style={{ color: '#001529', wordBreak: 'break-all' }}>{poi.name}</h4>
-                                                    {poi.rating === undefined || poi.rating < 1 ? <p style={{ textAlign: 'right', marginTop: '-6%', color: '#001529' }}>Not available</p> : <p style={{ textAlign: 'right', marginTop: '-6%', color: '#001529' }}>{poi.rating > 4.5 ? 'Excellent' : poi.rating > 3.5 ? 'Good' : 'Fine'}<span style={{ backgroundColor: '#001529', borderRadius: '5px', color: 'white', padding: '5px', marginLeft: '1%' }}><strong >{poi.rating}</strong></span></p>}
-                                                    <p className="card-text" style={{ color: '#001529', marginTop: '-4%', marginLeft: '0%' }}><small style={{ color: '#001529' }}><ThumbUpIcon style={{ color: 'blue', fontSize: '18px', marginTop: '-3px', marginRight: '1%' }} />{poi.totalRating == null ? 'Ratings not available' : poi.totalRating} Total Ratings</small></p>
-                                                    <p className="card-text" style={{ color: 'red', marginTop: '10%', marginLeft: '0%' }}>You can stay upto {Math.floor(Math.random() * 3) + 1} Hours</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </TimelineContent>
-                            </TimelineItem>
-                            <TimelineItem>
-                                <TimelineSeparator>
-                                    <TimelineDot color="secondary">
-                                        <DirectionsCarIcon />
-                                    </TimelineDot>
-                                    <TimelineConnector />
-                                </TimelineSeparator>
-                                <TimelineContent>
-                                    <Typography>
-                                        Driving
-            </Typography>
-                                    <Typography variant="body2" color="textSecondary">
-                                        {(index == 2 || index == this.state.selectedPois.length - 1) ? this.state.poiToHotelTime[index] + ' hours' : this.state.poiTimeIntervals[index] + ' hours'}
-                                    </Typography>
-                                </TimelineContent>
-                            </TimelineItem> {index == 2 && index != this.state.selectedPois.length - 1 ? <EndingTowardsHotel tripEnd={false} /> : index == this.state.selectedPois.length - 1 || (index + 1) % 3 == 0 ? <EndingTowardsHotel tripEnd={true} /> : <></>}</div>)}
-                    </Timeline>
-                    <><Alert
-                        banner
-                        style={{ marginLeft: '10%' }}
-                        message={
-                            <TextLoop mask>
-                                <div>Your Trip is scheduled.</div>
-                                <div>Your Trip duration is for {this.state.tripDays} days.</div>
-                                <div>Save your trip.</div>
-                            </TextLoop>
-                        }
-                    />
-                        <label id="labels" style={{ position: 'relative', marginTop:'2%', marginLeft:'10%' }}>Tour Categories:</label>
-                        <div style={{ position: 'relative',display: 'flex', marginLeft: '15%' }}>
-                            <div id="box" style={{ display: 'flex', flexDirection: 'column' }}>
-                                <label id="labels" >Weather:</label>
-                                {Array.isArray(this.state.tagWeatherType) &&
-                                    <select className="form-control" style={{ fontSize: '12px', width: '90px' }}
-                                        onChange={(e) => this.setState({ tagWeatherTypeValue: e.target.value })}
-                                    >
-                                        <option>--</option>
-                                        {this.state.tagWeatherType?.map(value => {
-                                            return (
-                                                <option value={value._id}>{value.name}</option>)
-                                        })}
-                                    </select>}
-                            </div>
-                            <div id="box" style={{ marginLeft: '20px', display: 'flex', flexDirection: 'column' }}>
-                                <label id="labels" style={{ float: 'left' }}>Hotels:</label>
-                                {Array.isArray(this.state.tagHotelType) &&
-                                    <select className="form-control" style={{ fontSize: '12px', width: '90px' }}
-                                        onChange={(e) => this.setState({ tagHotelTypeValue: e.target.value })}
-                                    >
-                                        <option>--</option>
-                                        {this.state.tagHotelType?.map(value => {
-                                            return (
-                                                <option value={value._id}>{value.name}</option>)
-                                        })}
-                                    </select>}
-                            </div>
-                            <br />
-                            <div id="box" style={{ marginLeft: '20px', display: 'flex', flexDirection: 'column' }}>
-                                <label id="labels">Trip days:</label>
-                                {Array.isArray(this.state.tagTripType) &&
-                                    <select className="form-control" style={{ fontSize: '12px', width: '100px' }}
-                                        onChange={(e) => this.setState({ tagTripTypeValue: e.target.value })}
-                                    >
-                                        <option>--</option>
-                                        {this.state.tagTripType?.map(value => {
-                                            return (
-                                                <option value={value._id}>{value.name}</option>)
-                                        })}
-                                    </select>}
-                            </div>
-                            <div id="box" style={{ marginLeft: '20px', display: 'flex', flexDirection: 'column' }}>
-                                <label id="labels" >Terrains:</label>
-                                {Array.isArray(this.state.tagLocationType) &&
-                                    <select className="form-control" style={{ fontSize: '12px', width: '100px' }}
-                                        onChange={(e) => this.setState({ tagLocationTypeValue: e.target.value })}
-                                    >
-                                        <option>--</option>
-                                        {this.state.tagLocationType?.map(value => {
-                                            return (
-                                                <option value={value._id}>{value.name}</option>)
-                                        })}
-                                    </select>}
-                            </div>
+                        </TimelineItem> {index == 2 && index != this.state.selectedPois.length - 1 ? <EndingTowardsHotel tripEnd={false} /> : index == this.state.selectedPois.length - 1 || (index + 1) % 3 == 0 ? <EndingTowardsHotel tripEnd={true} /> : <></>}</div>)}
+                </Timeline>
+                <><Alert
+                    banner
+                    style={{ marginLeft: '10%' }}
+                    message={
+                        <TextLoop mask>
+                            <div>Your Trip is scheduled.</div>
+                            <div>Your Trip duration is for {this.state.tripDays} days.</div>
+                            <div>Save your trip.</div>
+                        </TextLoop>
+                    }
+                />
+                    <label id="labels" style={{ position: 'relative', marginTop: '2%', marginLeft: '10%' }}>Tour Categories:</label>
+                    <div style={{ position: 'relative', display: 'flex', marginLeft: '15%' }}>
+                        <div id="box" style={{ display: 'flex', flexDirection: 'column' }}>
+                            <label id="labels" >Weather:</label>
+                            {Array.isArray(this.state.tagWeatherType) &&
+                                <select className="form-control" style={{ fontSize: '12px', width: '90px' }}
+                                    onChange={(e) => this.setState({ tagWeatherTypeValue: e.target.value })}
+                                >
+                                    <option>--</option>
+                                    {this.state.tagWeatherType?.map(value => {
+                                        return (
+                                            <option value={value._id}>{value.name}</option>)
+                                    })}
+                                </select>}
                         </div>
-                        <div style={{ marginLeft: '85%', marginTop: '2%' }}>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                size="large"
-                                startIcon={<SaveIcon />}
-                                style={{ marginLeft: '2%' }}
-                                onClick={this.saveTour}
-                                disabled={this.state.isDisabled}
-                            >
-                                Save
+                        <div id="box" style={{ marginLeft: '20px', display: 'flex', flexDirection: 'column' }}>
+                            <label id="labels" style={{ float: 'left' }}>Hotels:</label>
+                            {Array.isArray(this.state.tagHotelType) &&
+                                <select className="form-control" style={{ fontSize: '12px', width: '90px' }}
+                                    onChange={(e) => this.setState({ tagHotelTypeValue: e.target.value })}
+                                >
+                                    <option>--</option>
+                                    {this.state.tagHotelType?.map(value => {
+                                        return (
+                                            <option value={value._id}>{value.name}</option>)
+                                    })}
+                                </select>}
+                        </div>
+                        <br />
+                        <div id="box" style={{ marginLeft: '20px', display: 'flex', flexDirection: 'column' }}>
+                            <label id="labels">Trip days:</label>
+                            {Array.isArray(this.state.tagTripType) &&
+                                <select className="form-control" style={{ fontSize: '12px', width: '100px' }}
+                                    onChange={(e) => this.setState({ tagTripTypeValue: e.target.value })}
+                                >
+                                    <option>--</option>
+                                    {this.state.tagTripType?.map(value => {
+                                        return (
+                                            <option value={value._id}>{value.name}</option>)
+                                    })}
+                                </select>}
+                        </div>
+                        <div id="box" style={{ marginLeft: '20px', display: 'flex', flexDirection: 'column' }}>
+                            <label id="labels" >Terrains:</label>
+                            {Array.isArray(this.state.tagLocationType) &&
+                                <select className="form-control" style={{ fontSize: '12px', width: '100px' }}
+                                    onChange={(e) => this.setState({ tagLocationTypeValue: e.target.value })}
+                                >
+                                    <option>--</option>
+                                    {this.state.tagLocationType?.map(value => {
+                                        return (
+                                            <option value={value._id}>{value.name}</option>)
+                                    })}
+                                </select>}
+                        </div>
+                    </div>
+                    <div style={{ marginLeft: '85%', marginTop: '2%' }}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            size="large"
+                            startIcon={<SaveIcon />}
+                            style={{ marginLeft: '2%' }}
+                            onClick={this.saveTour}
+                            disabled={this.state.isDisabled}
+                        >
+                            Save
       </Button>
-                        </div>
-                        {/* <ReactToPrint	
+                    </div>
+                    {/* <ReactToPrint	
                             trigger={() => {	
                                 // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop	
                                 // to the root node of the returned component as it will be overwritten.	
@@ -997,8 +1000,8 @@ export default class Automatedtourgenerator extends Component {
                             }}	
                             content={Tourgenerator}	
                         />  */}
-                    </>
-                </div> : <div style={{ marginLeft: '49%', marginTop: '15%' }} ><Spin size="large" /><h4 style={{ marginLeft: '-8%', marginTop: '1%' }}>Generating Trip</h4></div>} </>
-            )
-        }
+                </>
+            </div> : <div style={{ marginLeft: '49%', marginTop: '15%' }} ><Spin size="large" /><h4 style={{ marginLeft: '-8%', marginTop: '1%' }}>Generating Trip</h4></div>} </>
+        )
     }
+}
